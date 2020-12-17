@@ -192,7 +192,7 @@ class Address(models.Model):
 ########################## Email ##################################3
 class Email(models.Model):
 
-    author = models.ForeignKey("User", verbose_name=_("Author"), on_delete=models.CASCADE)
+    author = models.ForeignKey("User", verbose_name=_("Author"), on_delete=models.CASCADE, related_name='mailing', related_query_name='mailing')
     subject = models.CharField(_("Subject"), max_length=150, db_index=True)
     body = models.TextField(_("Body"))
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
