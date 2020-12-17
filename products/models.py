@@ -47,7 +47,7 @@ class Brand(models.Model):
 class ImageGallery(models.Model):
 
     image = models.ImageField(_("Image"), upload_to='products/%Y/%m/%d', blank=True)
-    product = models.ForeignKey("Product", verbose_name=_("Product"), on_delete=models.CASCADE, related_name='image', related_query_name='image')
+    product = models.ForeignKey("Product", verbose_name=_("Product"), on_delete=models.CASCADE, related_name='image_gallery', related_query_name='image_gallery')
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)   
 

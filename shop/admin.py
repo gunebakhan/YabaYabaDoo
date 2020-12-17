@@ -5,7 +5,7 @@ from .models import *
 # Register your models here.
 @admin.register(Shop)
 class ShopAdmin(admin.ModelAdmin):
-    list_display_links = ('user', 'name', 'slug', 'status', 'closed')
+    list_display = ('user', 'name', 'slug', 'status', 'closed')
     search_fields = ('name', 'slug')
     list_filter = ('joined', 'status', 'closed')
 

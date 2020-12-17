@@ -21,7 +21,7 @@ class BrandAdmin(admin.ModelAdmin):
 class ImageGalleryAdmin(admin.ModelAdmin):
     list_display = ('product', 'created', 'updated')
     search_fields = ('product',)
-    list_filter = ('create', 'update')
+    list_filter = ('created', 'updated')
 
 
 @admin.register(Product)
