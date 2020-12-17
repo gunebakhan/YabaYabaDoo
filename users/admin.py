@@ -29,6 +29,7 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('province', 'city', 'postal_code')
+    list_filter = ('province', 'city')
 
 
 def make_published(modeladmin, request, queryset):
@@ -39,4 +40,5 @@ make_published.short_description = "Mark selected stories as published"
 @admin.register(Email)
 class EmailAdmin(admin.ModelAdmin):
     list_display = ('author', 'subject', 'created', 'updated', 'publish', 'draft')
+    list_filter = ('publish', 'draft')
     actions = [make_published]
