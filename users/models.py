@@ -195,7 +195,11 @@ class Email(models.Model):
     author = models.ForeignKey("User", verbose_name=_("Author"), on_delete=models.CASCADE)
     subject = models.CharField(_("Subject"), max_length=150, db_index=True)
     body = models.TextField(_("Body"))
-
+    created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
+    updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
+    publish = models.DateTimeField(_("Publish"), default=timezone.now)
+    draft = models.BooleanField(_("Draft"), default=True)
+    
     class Meta:
         verbose_name = _("Email")
         verbose_name_plural = _("Emails")
