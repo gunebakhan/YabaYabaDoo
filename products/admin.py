@@ -7,19 +7,21 @@ from .models import *
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'parent', 'create', 'update')
     search_fields = ('name', 'slug', 'parent')
+    list_filter = ('create', 'update')
 
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'create', 'update')
     search_fields = ('name', 'slug')
+    list_display = ('create', 'update')
 
 
 @admin.register(ImageGallery)
 class ImageGalleryAdmin(admin.ModelAdmin):
     list_display = ('product', 'created', 'updated')
     search_fields = ('product',)
-    list_filter = ()
+    list_filter = ('create', 'update')
 
 
 @admin.register(Product)
