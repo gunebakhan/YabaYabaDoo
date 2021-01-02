@@ -126,3 +126,16 @@ class Comment(models.Model):
         return self.title
 
 
+class LikeProduct(models.Model):
+
+    product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.CASCADE, related_query_name='likes', related_name='likes')
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE, related_query_name='likes', related_name='likes')
+    condition = models.BinaryField(_("Condition"), blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("LikeProduct")
+        verbose_name_plural = _("LikeProducts")
+
+    def __str__(self):
+        return f"{self.user}-{self.product}"
+

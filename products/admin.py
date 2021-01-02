@@ -45,3 +45,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('created', 'updated', 'publish', 'draft')
 
 
+@admin.register(LikeProduct)
+class LikeProductAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'condition')
+    search_fields = ('user', 'product')
+    list_filter = ('condition',)
