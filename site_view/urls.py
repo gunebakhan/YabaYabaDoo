@@ -1,9 +1,9 @@
 from django.urls import path, include
-from django.views.generic import TemplateView
+from .views import *
 
 app_name = 'site_view'
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='home/index.html'), name='home'),
+    path('', SliderView.as_view(), name='home'),
     # path('', include(''))
 ]

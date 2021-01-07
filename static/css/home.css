@@ -213,7 +213,8 @@ a.btn {
 }
 
 img.carousel {
-	border-radius: 25px;
+  border-radius: 25px;
+  cursor: pointer;
 }
 
 .btn-shoe {
