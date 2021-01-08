@@ -5,21 +5,31 @@ from shop.models import Shop
 
 
 # Create your models here.
-class Festival(models.Model):
+class Advertisement(models.Model):
+    options = (
+        ('festival', 'Festival'),
+        ('high-adv', 'High Priority Advertisement'),
+        ('foursome-adv', 'Foursom Advertisement'),
+        ('twosome-adv', 'Twosome Advertisement')
 
+    )
     title = models.CharField(_("Title"), max_length=250)
     subtitle = models.CharField(_("Subtitle"), max_length=250)
     image = models.ImageField(_("Image"), upload_to="home/festival")
+    priority = models.CharField(_("Priority"), max_length=50, choices=options)
+    status = models.BooleanField(_("Status"), default=False)
+    url = models.URLField(_("Url"), max_length=200, default="https://google.com")
+
 
     class Meta:
-        verbose_name = _("Festival")
-        verbose_name_plural = _("Festivals")
+        verbose_name = _("Advertisement")
+        verbose_name_plural = _("Advertisements")
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("Festival_detail", kwargs={"pk": self.pk})
+        return reverse("Advertisement_detail", kwargs={"pk": self.pk})
 
 
 

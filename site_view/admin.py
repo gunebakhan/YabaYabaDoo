@@ -4,3 +4,9 @@ from .models import *
 @admin.register(Slider)
 class Admin(admin.ModelAdmin):
     list_display = ('title', 'subtitle', 'image')
+
+
+@admin.register(Advertisement)
+class AdvertisementAdmin(admin.ModelAdmin):
+    list_display = ('title', 'subtitle', 'priority', 'status')
+
