@@ -34,7 +34,6 @@ class ShopProduct(models.Model):
     quantity = models.IntegerField(_("Quantity"))
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
-    slug = models.SlugField(_("Slug"))
 
     class Meta:
         verbose_name = _("ShopProduct")
@@ -52,7 +51,6 @@ class OrderItem(models.Model):
     price = models.DecimalField(_("price"), max_digits=10, decimal_places=2)
     create_at = models.DateTimeField(_("Create At"), auto_now=False, auto_now_add=True)
     update_at = models.DateTimeField(_("Update At"), auto_now=True, auto_now_add=False)
-    slug = models.SlugField(_("Slug"))
 
     class Meta:
         verbose_name = _("OrderItem")
@@ -69,7 +67,7 @@ class Order(models.Model):
     update_at = models.DateTimeField(_("Update At"), auto_now=True, auto_now_add=False)
     discription = models.TextField(_("Discription"))
     paid = models.BooleanField(_("Paid"), default=False)
-    slug = models.SlugField(_("Slug"))
+
 
     class Meta:
         verbose_name = _("Order")
@@ -97,7 +95,6 @@ class Payment(models.Model):
     paid_price = models.DecimalField(_("Paid Price"), max_digits=10, decimal_places=2, default=0.0)
     create_at = models.DateTimeField(_("Create At"), auto_now=False, auto_now_add=True)
     update_at = models.DateTimeField(_("Update At"), auto_now=True, auto_now_add=False)
-    slug = models.SlugField(_("Slug"))
 
     class Meta:
         verbose_name = _("Payment")
@@ -117,7 +114,6 @@ class BasketItem(models.Model):
     count = models.IntegerField(_("Count"))
     create_at = models.DateTimeField(_("Create At"), auto_now=False, auto_now_add=True)
     update_at = models.DateTimeField(_("Update At"), auto_now=True, auto_now_add=False)
-    slug = models.SlugField(_("Slug"))
 
 
     class Meta:
@@ -135,7 +131,6 @@ class Basket(models.Model):
 
     create_at = models.DateTimeField(_("Create At"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update At"), auto_now=True)
-    slug = models.SlugField(_("Slug"))
 
     class Meta:
         verbose_name = _("Basket")

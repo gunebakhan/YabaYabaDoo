@@ -46,7 +46,7 @@ class Brand(models.Model):
 
 class ImageGallery(models.Model):
 
-    image = models.ImageField(_("Image"), upload_to='products/%Y/%m/%d', blank=True)
+    image = models.ImageField(_("Image"), upload_to='media/products/images/%Y/%m/%d', blank=True)
     product = models.ForeignKey("Product", verbose_name=_("Product"), on_delete=models.CASCADE, related_name='image_gallery', related_query_name='image_gallery')
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)   
@@ -68,7 +68,7 @@ class Product(models.Model):
     name = models.CharField(_("Name"), max_length=200, db_index=True)
     slug = models.SlugField(_("Slug"), max_length=200, db_index=True)
     description = models.TextField(_("Description"), blank=True)
-    image = models.ImageField(_("Image"), upload_to='products/products')
+    image = models.ImageField(_("Image"), upload_to='media/products')
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
 
