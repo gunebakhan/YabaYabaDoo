@@ -1,0 +1,8 @@
+<ul>
+{% for product in product_list %}
+    <li>
+        <p>{{product.name}}</p>
+        <p><img src="{{product.image.url}}"></p>
+    </li>
+{% endfor %}
+<ul>
