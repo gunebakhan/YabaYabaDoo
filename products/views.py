@@ -22,10 +22,15 @@ class ProductsList(ListView):
     ordering = ['-created']
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(category__slug=self.kwargs['slug'])
+        if self.kwargs.get('brand') is not None:
+            return qs.filter(category__slug=self.kwargs['cat'], brand__slug=self.kwargs['brand'])
+        return qs.filter(category__slug=self.kwargs['cat'])
 
     
     def get_ordering(self):
         ordering = self.request.GET.get('ordering')
+
+        if ordering == 'price':
+            pass
         # validate ordering here
         return ordering

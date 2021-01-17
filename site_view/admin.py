@@ -10,3 +10,9 @@ class Admin(admin.ModelAdmin):
 class AdvertisementAdmin(admin.ModelAdmin):
     list_display = ('title', 'subtitle', 'priority', 'status')
 
+
+
+@admin.register(Logo)
+class LogoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'subtitle', 'image')
+

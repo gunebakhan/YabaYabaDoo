@@ -61,184 +61,76 @@
                     <div class="mega-menu-container">
                         <div class="mega-menu-grid">
                             <div class="sub-nav-column">
-
+                                <div class="z-depth-1 polariod">
+                                    <img class="w-25" src="https://dkstatics-public.digikala.com/digikala-products/89e7f2abac447a018242a954f03f8a6926344f8b_1594023235.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90" alt="">
+                                </div>
                                 <ul class="collection">
                                     <!-- these nested links should be have the correct href path to nav user to this section -->
 
                                     <li class="collection-item">
-                                        <h3>Products & Product Ranges</h3>
+                                        <a href="{% url 'products:products_list' 'mobile-phone' %}"><h3>گوشی موبایل</h3></a>
                                     </li>
-                                    <li class="collection-item"><a href="#">Top Selling</a></li>
-                                    <li class="collection-item"><a href="#">Currently on Promotion</a></li>
-                                    <li class="collection-item"><a href="#">Back in Stock</a></li>
-                                    <li class="collection-item"><a href="#">Launching Soon</a></li>
-                                    <li class="collection-item"><a href="#">All</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='samsung' %}">سامسونگ</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='huawei' %}">هوآوی</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='apple' %}">اپل</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='xiaomi' %}">شیائومی</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='honor' %}">آنر</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='nokia' %}">نوکیا</a></li>
+                                </ul>
+                            </div>
+                            <div class="sub-nav-column">
+                                <div class="z-depth-1 polariod">
+                                    <img class="w-25" src="https://dkstatics-public.digikala.com/digikala-products/4209444.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90" alt="">
+                                </div>
+                                <ul class="collection">
+                                    <!-- these nested links should be have the correct href path to nav user to this section -->
+
+                                    <li class="collection-item">
+                                        <a href="{% url 'products:products_list' 'laptop' %}"><h3>لپ تاپ</h3></a>
+                                    </li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='asus' %}">ایسوس</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='acer' %}">ایسر</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='apple' %}">اپل</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='dell' %}">دل</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='microsoft' %}">مایکروسافت</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='lenovo' %}">لنوو</a></li>
                                 </ul>
                             </div>
                             <div class="sub-nav-column">
                                 <div class="z-depth-1 polariod">
                                     <img class="theme responsive-img" src="" alt="">
-                                    <h4>Top Selling</h4>
                                 </div>
                             </div>
                             <div class="sub-nav-column">
                                 <div class="z-depth-1 polariod">
-                                    <img class="theme responsive-img" src="" alt="">
-                                    <h4>Launching Soon</h4>
+                                    <img class="w-25" src="https://dkstatics-public-2.digikala.com/digikala-products/111205158.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90" alt="">
                                 </div>
-                            </div>
-                            <div class="sub-nav-column">
-                                <div class="z-depth-1 polariod">
-                                    <img class=" theme responsive-img" src="" alt="">
-                                    <h4>Currently on Promotionn</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
 
-                <li><i class="fas fa-store"></i><a href="#" class="mr-1">سوپر مارکت</a>
-                    <div class="mega-menu-container">
-                        <div class="mega-menu-grid">
-                            <div class="sub-nav-column">
-                                <h3>Category 1</h3>
-                                <ul class="collection">
-                                    <li class="collection-item"><a href="#">Category 1 - configuration 1</a></li>
-                                    <li class="collection-item"><a href="#">Category 1 - configuration 2</a></li>
-                                    <li class="collection-item"><a href="#">Category 1 - configuration 3</a></li>
-                                    <li class="collection-item"><a href="#">Category 1 - configuration 4</a></li>
-                                </ul>
-                            </div>
-                            <div class="sub-nav-column">
-                                <h3>Category 2</h3>
-                                <ul class="collection">
-                                    <li class="collection-item"><a href="#">Category 2 - configuration 1</a></li>
-                                    <li class="collection-item"><a href="#">Category 2 - configuration 2</a></li>
-                                    <li class="collection-item"><a href="#">Category 2 - configuration 3</a></li>
-                                    <li class="collection-item"><a href="#">Category 2 - configuration 4</a></li>
-                                </ul>
-                            </div>
-                            <div class="sub-nav-column">
-                                <h3>Category 3</h3>
-                                <ul class="collection">
-                                    <li class="collection-item"><a href="#">Category 3 - configuration 1</a></li>
-                                    <li class="collection-item"><a href="#">Category 3 - configuration 2</a></li>
-                                    <li class="collection-item"><a href="#">Category 3 - configuration 3</a></li>
-                                    <li class="collection-item"><a href="#">Category 3 - configuration 4</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li><i class="fas fa-percent"></i><a href="#" class="mr-1">تخفیفها و پیشنهادات</a>
-                    <div class="mega-menu-container">
-                        <div class="mega-menu-grid">
-                            <div class="sub-nav-column">
-                                <h3>Services</h3>
-                                <ul class="collection">
-                                    <li class="collection-item"><a href="#">Pre-Sale</a></li>
-                                    <li class="collection-item"><a href="#">After-Sale</a></li>
-                                </ul>
-                            </div>
+                                 <ul class="collection">
+                                    <!-- these nested links should be have the correct href path to nav user to this section -->
 
-                            <div class="sub-nav-column">
-                                <h3>Pre-Sale</h3>
-                                <ul class="collection">
-                                    <li class="collection-item"><a href="#">Situation Analysis</a></li>
-                                    <li class="collection-item"><a href="#">Solution Recommendation</a></li>
-                                    <li class="collection-item"><a href="#">Chemical Analysis </a></li>
-                                    <li class="collection-item"><a href="#">Volume Curves</a></li>
-                                    <li class="collection-item"><a href="#">Custom Build Solutions</a></li>
-                                    <li class="collection-item"> <a class="em" href="#"> More Pre-sale assistance >></a>
-                                    </li>
-                                </ul>
-
-                            </div>
-
-                            <div class="sub-nav-column">
-                                <h3>After-Sale</h3>
-                                <ul class="collection">
-                                    <li class="collection-item"><a href="#">Financing</a></li>
-                                    <li class="collection-item"><a href="#">Repairs</a></li>
-                                    <li class="collection-item"><a href="#">Warrenty</a></li>
-                                    <li class="collection-item"><a href="#">Training</a></li>
-                                    <li class="collection-item"> <a class="em" href="#">More After-sale Care >></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sub-nav-column">
-                                <div class="z-depth-1 polariod">
-                                    <img src="" alt="" class="theme responsive-img">
-                                    <h4>Services</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li><i class="fas fa-medal"></i><a href="#" class="mr-1">دیجی کالای من</a>
-                    <div class="mega-menu-container">
-                        <div class="mega-menu-grid">
-                            <div class="sub-nav-column">
-                                <ul class="collection">
                                     <li class="collection-item">
-                                        <h3>About Us</h3>
+                                        <a href="{% url 'products:products_list' 'tablet' %}"><h3> تبلت</h3></a>
                                     </li>
-                                    <li class="collection-item"><a href="#">Our History</a></li>
-                                    <li class="collection-item"><a href="#">Company Profile</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='samsung' %}">سامسونگ</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='lenovo' %}">لنوو</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='apple' %}">اپل</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='huawei' %}">هوآوی</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='microsoft' %}">مایکروسافت</a></li>
+                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='xvision' %}">ایکس ویژن</a></li>
                                 </ul>
-                            </div>
-                            <div class="sub-nav-column">
-                                <ul class="collection">
-                                    <li class="collection-item">
-                                        <h3>Our Team</h3>
-                                    </li>
-                                    <li class="collection-item"><a href="#">Our Team</a></li>
-                                    <li class="collection-item"><a href="#">Vacancies </a></li>
-                                </ul>
-                            </div>
-                            <div class="sub-nav-column">
-                                <ul class="collection">
-                                    <li class="collection-item">
-                                        <h3>Our Awards</h3>
-                                    </li>
-                                    <li class="collection-item"><a href="#">2018 - *</a></li>
-                                    <li class="collection-item"><a href="#">2015 - 2017</a></li>
-                                    <li class="collection-item"><a href="#">2012 - 2014</a></li>
-                                    <li class="collection-item"><a href="#">2009 - 2011</a></li>
-                                    <li class="collection-item"><a href="#">2009 and prior</a></li>
-                                </ul>
-                            </div>
-                            <div class="sub-nav-column">
-                                <div class="z-depth-1 polariod">
-                                    <img src="" alt="" class="theme responsive-img">
-                                    <h4>Awarder over 55 awards</h4>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </li>
+
+                <li><i class="fas fa-store"></i><a href="#" class="mr-1">سوپر مارکت</a></li>
+                <li><i class="fas fa-percent"></i><a href="#" class="mr-1">تخفیفها و پیشنهادات</a></li>
+                <li><i class="fas fa-medal"></i><a href="#" class="mr-1">دیجی کالای من</a></li>
                 <li><i class="fas fa-plus"></i><a href="#" class="mr-1">دیجی پلاس</a>
                     <div class="mega-menu-container ">
 
-                        <div class="mega-menu-grid">
-                            <div class="sub-nav-column">
-                                <h3>Ways to get in touch</h3>
-                            </div>
-                            <div class="sub-nav-column">
-
-                            </div>
-                            <div class="sub-nav-column">
-
-                            </div>
-                            <div class="sub-nav-column">
-                                <div class="z-depth-1 polariod">
-                                    <img src="" alt="" class="theme responsive-img">
-                                    <h3>Location Map</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <div></div>
                 </li>
                 <li><i class="fas fa-shapes"></i><a href="#" class="mr-1">دیجی کلاب</a>
                     <div class="mega-menu-container ">

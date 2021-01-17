@@ -21,5 +21,12 @@ class SliderView(TemplateView):
         laptop_category = Category.objects.get(name='لپ تاپ')
         laptops = ShopProduct.objects.filter(product__category=laptop_category)
         context['laptops'] = laptops
+        context['logos'] = Logo.objects.get(title='logo')
         return context
+
+
+class FooterView(TemplateView):
+    template_name = 'base/footer.html'
+    model = Logo
+    template_name = "logos"
     

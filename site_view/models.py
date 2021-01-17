@@ -18,8 +18,8 @@ class Advertisement(models.Model):
     image = models.ImageField(_("Image"), upload_to="home/festival")
     priority = models.CharField(_("Priority"), max_length=50, choices=options)
     status = models.BooleanField(_("Status"), default=False)
-    url = models.URLField(_("Url"), max_length=200, default="https://google.com")
-
+    url = models.URLField(_("Url"), max_length=200,
+                          default="https://google.com")
 
     class Meta:
         verbose_name = _("Advertisement")
@@ -32,15 +32,14 @@ class Advertisement(models.Model):
         return reverse("Advertisement_detail", kwargs={"pk": self.pk})
 
 
-
 class Slider(models.Model):
 
     title = models.CharField(_("Title"), max_length=250)
     subtitle = models.CharField(_("Subtitle"), max_length=250)
     # lists = models.URLField(_("Lists"), max_length=200)
     image = models.ImageField(_("Image"), upload_to="home/shops")
-    action_url = models.URLField(_("Action Url"), max_length=200, default='http://127.0.0.1:8000')
-
+    action_url = models.URLField(
+        _("Action Url"), max_length=200, default='http://127.0.0.1:8000')
 
     class Meta:
         verbose_name = _("Slider")
@@ -51,6 +50,24 @@ class Slider(models.Model):
 
     def get_absolute_url(self):
         return reverse("Slider_detail", kwargs={"pk": self.pk})
+
+
+class Logo(models.Model):
+
+    title = models.CharField(_("Title"), max_length=250)
+    subtitle = models.CharField(_("Subtitle"), max_length=250)
+    # lists = models.URLField(_("Lists"), max_length=200)
+    image = models.ImageField(_("Image"), upload_to="home/shops")
+
+    class Meta:
+        verbose_name = _("Logo")
+        verbose_name_plural = _("Logos")
+
+    def __str__(self):
+        return self.subtitle
+
+    def get_absolute_url(self):
+        return reverse("Logo_detail", kwargs={"pk": self.pk})
 
 
 # class ShopAdv(models.Model):
