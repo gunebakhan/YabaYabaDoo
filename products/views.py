@@ -6,7 +6,7 @@ from .models import Product
 
 
 class SingleProduct(DetailView):
-    template_name = 'products/single-product.html'
+    template_name = 'products/single-product1.html'
     model = Product
     context_object_name = 'single_product'
 
