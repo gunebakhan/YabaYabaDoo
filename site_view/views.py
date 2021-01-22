@@ -10,7 +10,7 @@ class SliderView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["slides"] = Slider.objects.all()
+        context["slides"] = Slider.objects.filter(status=True)
         mobile_category = Category.objects.get(name="گوشی موبایل")
         mobile_phones = ShopProduct.objects.filter(product__category=mobile_category)
         context['mobiles'] = mobile_phones

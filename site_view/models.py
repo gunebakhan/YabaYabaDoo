@@ -36,7 +36,7 @@ class Slider(models.Model):
 
     title = models.CharField(_("Title"), max_length=250)
     subtitle = models.CharField(_("Subtitle"), max_length=250)
-    # lists = models.URLField(_("Lists"), max_length=200)
+    status = models.BooleanField(_("Status"), default=True)
     image = models.ImageField(_("Image"), upload_to="home/shops")
     action_url = models.URLField(
         _("Action Url"), max_length=200, default='http://127.0.0.1:8000')
