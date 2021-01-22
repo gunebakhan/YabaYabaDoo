@@ -99,22 +99,21 @@ li.color-selection {
 }
 
 
-.mfp-img {
- cursor: pointer; 
-}
-.mfp-force-scrollbars {
-  &.mfp-wrap {
-      overflow-y: auto !important;
-      overflow-x: auto !important;
-  }
-  .mfp-img {
-    max-width: none;
-  }
-  .mfp-close {
-   position: fixed;
-  }
-  
+.sailers-list-first {
+    background-color: #f4fbff;
+    border: 0.1rem solid #51c0d3;
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.5);
 }
 
+.sailers-list {
+    background-color: #fff;
+    border: 0.1rem solid #fff;
+    font-size: 0.95rem;
+    margin-top: -1rem;
+    color: rgba(0, 0, 0, 0.5);
+}
 
-
+a.buy-btn {
+    font-size: 1rem;
+}
