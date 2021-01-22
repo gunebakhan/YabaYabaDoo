@@ -117,3 +117,14 @@ li.color-selection {
 a.buy-btn {
     font-size: 1rem;
 }
+
+
+.triangle {
+    width: 0; 
+    height: 0; 
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent; 
+    margin-left: 5px;
+    margin-top: 7px;
+    border-right:5px solid #7fdfea; 
+}
