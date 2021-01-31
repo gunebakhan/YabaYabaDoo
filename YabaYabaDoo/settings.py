@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'products',
     'shop',
     'site_view',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'YabaYabaDoo.urls'
@@ -147,3 +150,5 @@ AUTH_USER_MODEL = 'users.User'
 # LOGOUT_URL = 'logout'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

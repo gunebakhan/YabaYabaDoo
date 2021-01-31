@@ -101,6 +101,7 @@ class ProductMeta(models.Model):
 class Comment(models.Model):
 
     RATING_CHOICES = (
+        (0, 'Zero'),
         (1, 'One'),
         (2, 'Two'),
         (3, 'Three'),
@@ -111,11 +112,11 @@ class Comment(models.Model):
     product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.CASCADE, related_name='comment', related_query_name='comment')
     title = models.CharField(_("Title"), max_length=250, db_index=True)
     body = models.TextField(_("Body"))
-    rate = models.CharField(_("Rate"), max_length=50, choices=RATING_CHOICES)
+    rate = models.CharField(_("Rate"), max_length=50, choices=RATING_CHOICES, default=0)
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
     publish = models.DateTimeField(_("Publish"), default=timezone.now)
-    draft = models.BooleanField(_("Draft"), default=False)
+    draft = models.BooleanField(_("Draft"), default=True)
 
     
     class Meta:

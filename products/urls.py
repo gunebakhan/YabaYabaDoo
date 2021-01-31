@@ -1,11 +1,12 @@
 from django.urls import path, include
-from .views import SingleProduct, ProductsList
+from .views import ProductsList, LaptopDetail, MobileView
 
 
 app_name = 'products'
 
 urlpatterns = [
-    path('product/<slug:slug>/', SingleProduct.as_view(), name='single_product'),
+    path('mobile-phone/<slug:slug>/', MobileView.as_view(), name='mobile_view'),
+    path('laptop/<slug:slug>/', LaptopDetail.as_view(), name='laptop_view'),
     path('categories/<slug:cat>/',
          ProductsList.as_view(), name='products_list'),
     path('categories/<slug:cat>/<slug:brand>/', ProductsList.as_view(), name='products_list_brands'),

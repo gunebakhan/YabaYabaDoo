@@ -52,6 +52,7 @@
             </div>
         </div>
         <div class="col col-md-4">
+        {% comment %} <a href="{% url 'products:mobile_view' 'Galaxy-A01-SM-A015F-DS' %}">{% url 'products:mobile_view' 'Galaxy-A01-SM-A015F-DS' %}</a> {% endcomment %}
             {% comment %} <img src="../../static/images/pust.gif" alt="" class="d-block w-100 carousel"> {% endcomment %}
             {% for adv in highPriorityAdv %}
                 <a href="{{adv.url}}"><img src="{{adv.image.url}}" alt="" class="d-block w-100 carousel mb-3"></a>
@@ -351,7 +352,7 @@
                         {% for mobile in mobiles %}
                         <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="0">
                             <!--data-swiper-autoplay это скорость autoplay для слайдов-->
-                            <a href="{% url 'products:single_product' mobile.product.slug %}"><img src="{{mobile.product.image.url}}" class="ag-slide_img" alt=""></a>
+                            <a href="{% url 'products:mobile_view' mobile.product.slug %}"><img src="{{mobile.product.image.url}}" class="ag-slide_img" alt=""></a>
                             <div class="ag-slide_info clearfix">
                                 <div class="ag-slide-info_descr">
                                     <small class="ag-slide-info_category">
@@ -389,7 +390,7 @@
                         {% for laptop in laptops %}
                         <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="0">
                             <!--data-swiper-autoplay это скорость autoplay для слайдов-->
-                            <a href="{% url 'products:single_product' laptop.product.slug %}"><img src="{{laptop.product.image.url}}" class="ag-slide_img" alt=""></a>
+                            <a href="{% url 'products:laptop_view' laptop.product.slug %}"><img src="{{laptop.product.image.url}}" class="ag-slide_img" alt=""></a>
                             <div class="ag-slide_info clearfix">
                                 <div class="ag-slide-info_descr">
                                     <small class="ag-slide-info_category">

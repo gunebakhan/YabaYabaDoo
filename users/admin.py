@@ -11,7 +11,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'username', 'is_staff', 'last_login', 'date_joined')
     fieldsets = (
         (_('authentication data'), {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('username',)}),
+        (_('Personal info'), {'fields': ('username', 'first_name', 'last_name')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
