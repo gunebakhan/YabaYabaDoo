@@ -69,7 +69,7 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['comments'] = Comment.objects.filter(draft=True)
+        context['comments'] = Comment.objects.filter(draft=True, product=self.object)
 
         return context
     

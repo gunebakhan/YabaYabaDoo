@@ -8,6 +8,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.auth import get_user_model
+from django.contrib.auth.views import LoginView, LogoutView
 
 User = get_user_model()
 
@@ -55,3 +56,9 @@ def activate(request, uidb64, token):
         return redirect('register')
     else:
         return render(request, 'user/activation_invalid.html')
+
+
+class Login(LoginView):
+    
+    template_name = "user/login.html"
+    redirect_field_name = "home"
