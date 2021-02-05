@@ -33,8 +33,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductMeta)
 class ProductMetaAdmin(admin.ModelAdmin):
-    list_display = ('product', 'label', 'value', 'created', 'updated')
-    search_fields = ('product', 'label')
+    list_display = ('product', 'updated')
+    search_fields = ('product', )
     list_filter = ('created', 'updated')
 
 

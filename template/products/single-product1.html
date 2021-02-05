@@ -1,7 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-
+{% load index %}
+{% load humanize %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -26,9 +27,7 @@
 <div class="single-container bg-white row">
     <div class="col col-md-4 border-left pl-2">
         <div>
-            <img class="w-75 m-3 big-img"
-                src="{{object.image.url}}"
-                alt="">
+            <img class="w-75 m-3 big-img" src="{{object.image.url}}" alt="">
         </div>
         <div class="row mt-5">
             <div class="col col-md-3">
@@ -67,16 +66,18 @@
         <h6 class="mt-5" style="text-align: right;">{{object.name}}</h6>
         <p class="title">Green GK-502 Keyboard with Persian Letters</p>
         <ul class="single-ul">
-            <li class="single-li"><i class="fas fa-star" style="color: yellow;"></i> 4.5</li>
+            <li class="single-li"><i class="fas fa-star" style="color: yellow;"></i> {{rating|floatformat:2}} </li>
             <li class="single-li">{{comments.count}} دیدگاه کابران</li>
             <li class="single-li">۱ پرسش و پاسخ</li>
         </ul>
         <ul class="single-ul my-3">
             <li class="single-li">برند: <a href="#"
-                    style="color: #5ab5cb; font-size: 0.9rem; border-bottom: 0.1rem dashed #5ab5cb;">{{object.brand}}</a></li>
+                    style="color: #5ab5cb; font-size: 0.9rem; border-bottom: 0.1rem dashed #5ab5cb;">{{object.brand}}</a>
+            </li>
             <li class="single-li">دسته بندی: <a href="#"
-                    style="color: #5ab5cb; font-size: 0.9rem; border-bottom: 0.1rem dashed #5ab5cb;"> {{object.category}}
-                    </a></li>
+                    style="color: #5ab5cb; font-size: 0.9rem; border-bottom: 0.1rem dashed #5ab5cb;">
+                    {{object.category}}
+                </a></li>
         </ul>
         <ul class="sing-ul my-3">
             <li class="single-li" style="font-size: 0.9rem;">انتخاب رنگ</li>
@@ -223,12 +224,12 @@
                     <tbody>
                         <tr>
                             <th scope="row">ابعاد</th>
-                            <td>381x251x27 میلی متر</td>
+                            <td>{{meta.size}}</td>
 
                         </tr>
                         <tr>
                             <th scope="row">وزن</th>
-                            <td>1.9 کیلوگرم</td>
+                            <td>{{meta.weight}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -242,24 +243,24 @@
                     <tbody>
                         <tr>
                             <th scope="row">سازنده پردازنده</th>
-                            <td>intel</td>
+                            <td>{{meta.cpu_manufacturer}}</td>
 
                         </tr>
                         <tr>
                             <th scope="row">سری پردازنده</th>
-                            <td>Celeron</td>
+                            <td>{{meta.cpu_series}}</td>
                         </tr>
                         <tr>
                             <th scope="row">مدل پردازنده</th>
-                            <td>N4000</td>
+                            <td>{{meta.cpu_model}}</td>
                         </tr>
                         <tr>
                             <th scope="row">فرکانس پردازنده</th>
-                            <td>1.1 تا 2.6GHz</td>
+                            <td>{{meta.cpu_speed}}</td>
                         </tr>
                         <tr>
                             <th scope="row">حافظه Cache</th>
-                            <td>4مگابایت</td>
+                            <td>{{meta.cach}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -274,12 +275,12 @@
                     <tbody>
                         <tr>
                             <th scope="row">ظرفیت حافظه RAM</th>
-                            <td>4 گیگابایت</td>
+                            <td>{{meta.ram_capacity}}</td>
 
                         </tr>
                         <tr>
                             <th scope="row">نوع حافظه RAM</th>
-                            <td>DDR4</td>
+                            <td>{{meta.ram_type}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -294,16 +295,35 @@
                     <tbody>
                         <tr>
                             <th scope="row">ظرفیت حافظه داخلی</th>
-                            <td>یک ترا بایت</td>
+                            <td>{{meta.storage}}</td>
 
                         </tr>
                         <tr>
                             <th scope="row">نوع حافظه داخلی</th>
-                            <td>هارد دیسک</td>
+                            <td>{{meta.storage_type}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex mt-5">
+                <div class="triangle"></div>
+                <div class=""> پردازنده گرافیکی</div>
+            </div>
+            <div>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row"> سازنده پردازنده گرافیکی </th>
+                            <td>{{meta.gpu_manufacturer}}</td>
+
                         </tr>
                         <tr>
-                            <th scope="row"> مشخصات حافظه داخلی</th>
-                            <td> 5400RPM</td>
+                            <th scope="row">مدل پردازنده گرافیکی</th>
+                            <td>{{meta.gpu_model}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">حافظه پردازنده گرافیکی</th>
+                            <td>{{meta.gpu_ram}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -311,24 +331,53 @@
         </div>
         <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
             <div class="message"></div>
+            {% if request.user.is_authenticated%}
             <form method="post" id="commentForm" name="commentForm">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button type="submit" class='btn btn-primary' id="submitComment">ارسال</button>
             </form>
-
+            {% endif %}
             <div class="mt-5">
                 {% for comment in comments %}
                 <div class="card" style="width: 18rem;">
                     <div class="container">
                         <p class="card-body">
-                        <h6 class="card-title">
-                            {{comment.title}}
-                        </h6>
+                        <h1>{{comment.id}}</h1>
                         <small class="card-subtitle">{{comment.created|date}}</small>
                         <p>{{comment.author.get_full_name}}</p>
+                        <span class="badge badge-success my-3" id="like_{{comment.id}}">Likes
+                            {{likes|get_item:comment.id}} 
+                        </span>
+                        <span class="badge badge-danger m-3" id="dislike_{{comment.id}}">Dislikes
+                            {{dislikes|get_item:comment.id}}
+
+                        </span>
                         <p class="card-text">
-                            {{comment.body}}
+                            {{comment.body}} <br>
+                            {% if request.user.is_authenticated %}
+                            {% if author_likes|get_item:comment.id %}
+                            <button class="btn btn-success my-3" id="like_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'like')" disabled>Like</button>
+                            <button class="btn btn-outline-danger m-3" id="dislike_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'dislike')" disabled>Dislike</button>
+                            {% elif author_dislikes|get_item:comment.id %}
+                            <button class="btn btn-outline-success my-3" id="like_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'like')" disabled>Like</button>
+                            <button class="btn btn-danger m-3" id="dislike_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'dislike')" disabled>Dislike</button>
+                            {% else %}
+                            <button class="btn btn-outline-success my-3" id="like_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'like')">Like</button>
+                            <button class="btn btn-outline-danger m-3" id="dislike_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'dislike')">Dislike</button>
+                            {% endif %}
+                            {% else %}
+                            <button class="btn btn-outline-success my-3" id="like_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'like')">Like</button>
+                            <button class="btn btn-outline-danger m-3" id="dislike_btn_{{comment.id}}"
+                                onclick="like({{comment.id}}, 'dislike')">Dislike</button>
+                            {% endif %}
                         </p>
                         </p>
                     </div>
@@ -429,6 +478,39 @@
             });
         }
     });
+
+
+    function like(id, like_type) {
+        $.ajax({
+            type: "post",
+            url: "{% url 'products:like_comment' %}",
+            data: {
+                id: id,
+                like_type: like_type,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
+                action: 'post',
+            },
+            success: function (json) {
+                json = JSON.parse(json)
+                like_counts = json['like_counts']
+                if (like_type == 'like') {
+                    e_id = "like_" + id;
+                    string = "Like ";
+                    document.getElementById("like_btn_" + id).className = "btn btn-success";
+                }
+                else {
+                    e_id = "dislike_" + id;
+                    string = "Dislikes ";
+                    document.getElementById("dislike_btn_" + id).className = "btn btn-danger";
+                }
+                // element = document.getElementById(e_id);
+                document.getElementById(e_id).innerHTML = string + like_counts;
+                document.getElementById("like_btn_" + id).disabled = true;
+                document.getElementById("dislike_btn_" + id).disabled = true;
+            },
+            error: function () { alert('error in liking') }
+        });
+    }
 
 </script>
 {% endblock script %}

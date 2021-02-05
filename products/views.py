@@ -8,7 +8,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import ModelFormMixin, FormMixin
 from django.utils import timezone
-from .models import Product, Comment
+from .models import Product, Comment, ProductMeta, CommentLike
 from .forms import CommentForm
 from django.views import View
 import json
@@ -69,7 +69,43 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['comments'] = Comment.objects.filter(draft=True, product=self.object)
+        allcomments = Comment.objects.filter(draft=False, product=self.object)
+        context['comments'] = allcomments
+        try:
+            meta = ProductMeta.objects.get(product=self.object)
+        except:
+            print('salamm')
+            return context
+        context['meta'] = meta
+
+        likes = {}
+        dislikes = {}
+        author_likes = {}
+        author_dislikes = {}
+
+        rating = 0
+        for comment in allcomments:
+            rating += comment.rate
+            likes[comment.id] = CommentLike.objects.filter(
+                comment=comment, condition=True).count()
+            dislikes[comment.id] = CommentLike.objects.filter(
+                comment=comment, condition=False).count()
+
+        context['rating'] = rating / allcomments.count()
+
+        if self.request.user.is_authenticated:
+            for comment in allcomments:
+                author_likes[comment.id] = CommentLike.objects.filter(
+                    comment=comment, condition=True, author=self.request.user)
+                author_dislikes[comment.id] = CommentLike.objects.filter(
+                    comment=comment, condition=False, author=self.request.user)
+
+        context['likes'] = likes
+        context['dislikes'] = dislikes
+        context['author_likes'] = author_likes
+        context['author_dislikes'] = author_dislikes
+
+        
 
         return context
     
@@ -88,7 +124,6 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
         if self.request.is_ajax():
             print('ajax')
         else:
-            print('salam')
             return super().get(request, *args, **kwargs)
 
 
@@ -156,3 +191,26 @@ class ProductsList(ListView):
             pass
         # validate ordering here
         return ordering
+
+
+def like_comment(request):
+    user = request.user
+    if request.POST.get('action') == 'post':
+        comment_id = str(request.POST.get('id'))
+        comment_id = json.loads(comment_id)
+        like_type = str(request.POST.get('like_type'))
+        if like_type == 'like':
+            status = True
+        else:
+            status = False
+        comment = Comment.objects.get(id=comment_id)
+        comment_like = CommentLike(
+            author=user, comment=comment, condition=status)
+        comment_like.save()
+        like_counts = CommentLike.objects.filter(
+            comment=comment, condition=status).count()
+        response = {'like_counts': like_counts}
+        response = json.dumps(response)
+        return HttpResponse(response, status=201)
+
+    return HttpResponse(json.dumps({'comment_id': -1}))

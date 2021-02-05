@@ -84,8 +84,20 @@ class Product(models.Model):
 class ProductMeta(models.Model):
 
     product = models.ForeignKey(Product, verbose_name=_("product"), on_delete=models.CASCADE, related_name='meta', related_query_name='meta')
-    label = models.CharField(_("Label"), max_length=250)
-    value = models.CharField(_("Value"), max_length=250)
+    size = models.CharField(_("Height Width Length"), max_length=50, default="None")
+    weight = models.CharField(_("Weight"), max_length=50, default="None")
+    cpu_manufacturer = models.CharField(_("CPU Manufacturer"), max_length=50, default="None")
+    cpu_series = models.CharField(_("CPU Series"), max_length=50, default="None")
+    cpu_model = models.CharField(_("CPU Model"), max_length=50, default="None")
+    cpu_speed = models.CharField(_("CPU Speed"), max_length=50, default="None")
+    cach = models.CharField(_("Cach"), max_length=50, default="0")
+    ram_capacity = models.CharField(_("RAM Capacity"), max_length=50, default="None")
+    ram_type = models.CharField(_("RAM Type"), max_length=50, default="None")
+    storage = models.CharField(_("Storage"), max_length=50, default="None")
+    storage_type = models.CharField(_("Storage Type"), max_length=50, default="None")
+    gpu_manufacturer = models.CharField(_("GPU Manufacturer"), max_length=50, default="None")
+    gpu_model = models.CharField(_("GPU Model"), max_length=50, default="None")
+    gpu_ram = models.CharField(_("GPU RAM"), max_length=50, default="None")
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
 
@@ -94,25 +106,42 @@ class ProductMeta(models.Model):
         verbose_name_plural = _("ProductMetas")
 
     def __str__(self):
-        return self.label
+        return self.product.name
+
+
+
+class CommentLike(models.Model):
+
+    author = models.ForeignKey(User, verbose_name=_("Author"), on_delete=models.CASCADE)
+    comment = models.ForeignKey("Comment", verbose_name=_("Comment"), on_delete=models.CASCADE)
+    condition = models.BooleanField(_("Condition"))
+    create_at = models.DateTimeField(_("Create at"), auto_now=False, auto_now_add=True)
+    update_at = models.DateTimeField(_("Update at"), auto_now=True, auto_now_add=False)
+
+    class Meta:
+        verbose_name = _("CommentLike")
+        verbose_name_plural = _("CommentLikes")
+
+    def __str__(self):
+        return self.condition
 
 
 
 class Comment(models.Model):
 
     RATING_CHOICES = (
-        (0, 'Zero'),
-        (1, 'One'),
-        (2, 'Two'),
-        (3, 'Three'),
-        (4, 'Foure'),
-        (5, 'Five'),
+        (0, 'صفر'),
+        (1, 'یک'),
+        (2, 'دو'),
+        (3, 'سه'),
+        (4, 'چهار'),
+        (5, 'پنج'),
     )
     author = models.ForeignKey(User, verbose_name=_("Author"), on_delete=models.CASCADE, related_query_name='comment', related_name='comment')
     product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.CASCADE, related_name='comment', related_query_name='comment')
     title = models.CharField(_("Title"), max_length=250, db_index=True)
     body = models.TextField(_("Body"))
-    rate = models.CharField(_("Rate"), max_length=50, choices=RATING_CHOICES, default=0)
+    rate = models.IntegerField(_("Rate"), choices=RATING_CHOICES, default=0)
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
     publish = models.DateTimeField(_("Publish"), default=timezone.now)
