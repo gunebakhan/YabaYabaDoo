@@ -56,13 +56,12 @@ class ImageGallery(models.Model):
         verbose_name_plural = _("ImageGalleries")
 
     def __str__(self):
-        return self.product
+        return self.product.name
 
 
 
 
 class Product(models.Model):
-
     category = models.ForeignKey(Category, verbose_name=_("Category"), on_delete=models.CASCADE, related_name='product', related_query_name='product')
     brand = models.ForeignKey(Brand, verbose_name=_("Brand"), on_delete=models.CASCADE, related_name='product', related_query_name='product')
     name = models.CharField(_("Name"), max_length=200, db_index=True)
@@ -82,7 +81,6 @@ class Product(models.Model):
 
 
 class ProductMeta(models.Model):
-
     product = models.ForeignKey(Product, verbose_name=_("product"), on_delete=models.CASCADE, related_name='meta', related_query_name='meta')
     size = models.CharField(_("Height Width Length"), max_length=50, default="None")
     weight = models.CharField(_("Weight"), max_length=50, default="None")

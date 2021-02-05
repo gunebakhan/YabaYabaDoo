@@ -8,12 +8,13 @@ from django.views.generic.detail import SingleObjectMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import ModelFormMixin, FormMixin
 from django.utils import timezone
-from .models import Product, Comment, ProductMeta, CommentLike
+from .models import Product, Comment, ProductMeta, CommentLike, ImageGallery
+from shop.models import ShopProduct
 from .forms import CommentForm
 from django.views import View
 import json
 from django.contrib import messages
-
+from django.db.models import Count
 
 # Create your views here.
 class AjaxableResponseMixin:
@@ -74,8 +75,7 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
         try:
             meta = ProductMeta.objects.get(product=self.object)
         except:
-            print('salamm')
-            return context
+            context['meta'] = None
         context['meta'] = meta
 
         likes = {}
@@ -105,7 +105,26 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
         context['author_likes'] = author_likes
         context['author_dislikes'] = author_dislikes
 
-        
+        shop_products = ShopProduct.objects.filter(product=self.object)
+        shop_products = shop_products.filter(shop__closed=False, shop__status=True)
+        shop_products = shop_products.exclude(quantity=0)
+        shop_products = shop_products.order_by('price')
+        context['shop_products'] = shop_products
+        # print(shop_products.count())
+        distinct = shop_products.order_by('color').values_list('color').distinct()
+        # shop_card = shop_products.filter(color__in=[item[0] for item in distinct])
+        # print(shop_card.count())
+        # distinct = shop_products.distinct('color').all()
+
+        context['colors'] = []
+        context['card_prodcts'] = {}
+        for item in distinct:
+            context['colors'].append(item[0])
+            context['card_prodcts'][item[0]] = shop_products.order_by(
+                'price').filter(color=item[0]).first()
+
+        context['images'] = ImageGallery.objects.filter(product=self.object)
+
 
         return context
     
@@ -214,3 +233,6 @@ def like_comment(request):
         return HttpResponse(response, status=201)
 
     return HttpResponse(json.dumps({'comment_id': -1}))
+
+
+

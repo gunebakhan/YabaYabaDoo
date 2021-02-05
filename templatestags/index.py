@@ -18,5 +18,13 @@ def index_url(indexable, i):
 @register.filter(name='get_item')
 def get_item(dicti, key):
     return dicti.get(key)
-    print(dicti)
-    # return 1
+
+
+@register.filter(name='shop_name')
+def shop_name(dicti, key):
+    print(key)
+    return dicti.get(key).shop
+
+@register.filter(name='product_price')
+def product_price(dicti, key):
+    return dicti.get(key).price

@@ -27,7 +27,16 @@ class Shop(models.Model):
 
 
 class ShopProduct(models.Model):
-
+    COLORS = (
+        ('black', 'Black'),
+        ('white', 'white'),
+        ('pink', 'Pink'),
+        ('red', 'Red'),
+        ('green', 'Green'),
+        ('yellow', 'Yellow'),
+    )
+    color = models.CharField(_("Color"), max_length=100,
+                             default='black', choices=COLORS)
     shop = models.ForeignKey(Shop, verbose_name=_("Shop"), on_delete=models.CASCADE, related_name='shop_products', related_query_name='shop_products')
     product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.CASCADE, related_name='shop_products', related_query_name='shop_products')
     price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2)
