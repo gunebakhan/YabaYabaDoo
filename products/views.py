@@ -9,12 +9,14 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import ModelFormMixin, FormMixin
 from django.utils import timezone
 from .models import Product, Comment, ProductMeta, CommentLike, ImageGallery
-from shop.models import ShopProduct
+from shop.models import ShopProduct, Shop
 from .forms import CommentForm
 from django.views import View
 import json
 from django.contrib import messages
 from django.db.models import Count
+from django.db.models import Min
+
 
 # Create your views here.
 class AjaxableResponseMixin:
@@ -90,8 +92,10 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
                 comment=comment, condition=True).count()
             dislikes[comment.id] = CommentLike.objects.filter(
                 comment=comment, condition=False).count()
-
-        context['rating'] = rating / allcomments.count()
+        try:
+            context['rating'] = rating / allcomments.count()
+        except Exception:
+            context['rating'] = 0
 
         if self.request.user.is_authenticated:
             for comment in allcomments:
@@ -201,7 +205,38 @@ class ProductsList(ListView):
         if self.kwargs.get('brand') is not None:
             return qs.filter(category__slug=self.kwargs['cat'], brand__slug=self.kwargs['brand'])
         return qs.filter(category__slug=self.kwargs['cat'])
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        rating_dictionary = {}
+        prices = {}
+        shops = {}
+        for product in self.object_list:
+            price = ShopProduct.objects.filter(product=product).values_list(
+                'shop').annotate(Min('price')).order_by('price')
 
+
+            prices[product.id] = price[0][1]
+            shops[product.id] = get_object_or_404(Shop, id=price[0][0])
+
+            comments = product.comment.filter(draft=False)
+            ratings = 0
+            for comment in comments:
+                ratings += comment.rate
+            try:
+                rating_dictionary[product.id] = (
+                    comments.count(), ratings/comments.count())
+            except Exception:
+                rating_dictionary[product.id] = (
+                    comments.count(), 0)
+                # print('zero')
+
+        context['rating'] = rating_dictionary
+        context['prices'] = prices
+        context['shops']  = shops
+        
+        return context
+    
     
     def get_ordering(self):
         ordering = self.request.GET.get('ordering')

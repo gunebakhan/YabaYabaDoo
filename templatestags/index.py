@@ -28,3 +28,19 @@ def shop_name(dicti, key):
 @register.filter(name='product_price')
 def product_price(dicti, key):
     return dicti.get(key).price
+
+
+@register.filter('get_rate')
+def get_rate(dicti, key):
+    rate = "{:1.2f}".format(dicti.get(key)[1])
+    return rate
+
+@register.filter('get_rate_count')
+def get_rate_count(dicti, key):
+    return dicti.get(key)[0]
+
+
+@register.filter(name='get_price')
+def get_price(dicti, key):
+    # print(dicti)
+    return dicti.get(key)

@@ -1,0 +1,22 @@
+.round {
+    border: 1px solid #fff;
+    border-radius: 3%;
+}
+
+.searchbar {
+    border: 0.5px solid rgba(0, 0, 0, 0.25);
+}
+
+/*      */
+.filter {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.85rem;
+}
+
+.filter-list {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+.product-title {
+  font-size: 0.1rem  !important;
+}

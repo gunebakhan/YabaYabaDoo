@@ -1,8 +1,546 @@
-<ul>
-{% for product in product_list %}
-    <li>
-        <p>{{product.name}}</p>
-        <p><img src="{{product.image.url}}"></p>
-    </li>
-{% endfor %}
-<ul>
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load index %}
+{% load humanize %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+    crossorigin="anonymous" />
+<style>
+    #slider {
+        margin: 10px;
+    }
+
+
+    .shop {
+        opacity: 0;
+    }
+
+    .card:hover  .shop {
+        opacity: 1;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/products_list.css' %}">
+{% endblock style %}
+
+{% block content %}
+
+<div class="container-fluid mt-3" style="text-align: right;">
+    <div class="row mx-1">
+        <div class="col col-md-3">
+            <div class="round bg-white p-3">
+                <p>دسته‌بندی نتایج</p>
+                <hr>
+                <ul style="list-style: inside;">
+                    <li>
+                        کالای دیجیتال
+                        <ul style="list-style: inside;" class="mr-3">
+                            <li>
+                                موبایل
+                                <ul style="list-style: inside;" class="mr-3">
+                                    <li>
+                                        گوشی موبایل
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-2 bg-white p-3 round">
+                <div id="titleMain">جستجو در نتایج:</div>
+                <form id="searchBrand">
+                    <span class="input-group-append">
+                        <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
+                        <i class="fa fa-search"
+                            style="position: relative; right: 0.5rem; top: 2.2rem; z-index: 33333;"></i>
+                        <!-- </button> -->
+                    </span>
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control" style="padding-right:2rem;">
+                    </div>
+                </form>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Samsung">
+                        <label class="form-check-label mr-3 brand" for="Samsung">
+                            Samsung
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Iphone">
+                        <label class="form-check-label mr-3 brand" for="Iphone">
+                            Iphone
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Huawei">
+                        <label class="form-check-label mr-3 brand" for="Huawei">
+                            Huawei
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Honor">
+                        <label class="form-check-label mr-3 brand" for="Honor">
+                            Honor
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="LG">
+                        <label class="form-check-label mr-3 brand" for="LG">
+                            LG
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Xiaomi">
+                        <label class="form-check-label mr-3 brand" for="Xiaomi">
+                            Xiaomi
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Oppo">
+                        <label class="form-check-label mr-3 brand" for="Oppo">
+                            Oppo
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round">
+                <div>
+                    دوربین‌های پشت گوشی
+                </div>
+                <hr>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="one-module">
+                        <label class="form-check-label mr-3" for="onde-module">
+                            ۱ ماژول دوربین
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="two-module">
+                        <label class="form-check-label mr-3" for="two-module">
+                            ۲ ماژول دوربین
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="no-camera">
+                        <label class="form-check-label mr-3" for="no-camera">
+                            بدون دوربین
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="four-module">
+                        <label class="form-check-label mr-3" for="four-module">
+                            ۴ ماژول دوربین
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="three-module">
+                        <label class="form-check-label mr-3" for="three-module">
+                            ۳ ماژول دوربین
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round">
+                <div>
+                    شبکه‌های ارتباطی
+                </div>
+                <hr>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="2G">
+                        <label class="form-check-label mr-3" for="2G">
+                            2G
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="3G">
+                        <label class="form-check-label mr-3" for="3G">
+                            3G
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="4G">
+                        <label class="form-check-label mr-3" for="4G">
+                            4G
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="5G">
+                        <label class="form-check-label mr-3" for="5G">
+                            5G
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round">
+                <div>تعداد سیم‌کارت</div>
+                <hr>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="one-sim">
+                        <label class="form-check-label mr-3" for="one-sim">
+                            یک
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="two-sim">
+                        <label class="form-check-label mr-3" for="two-sim">
+                            دو
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
+                <div id="titleDisplay">فناوری صفحه‌نمایش:</div>
+                <form id="search‌‌‌Display">
+                    <span class="input-group-append">
+                        <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
+                        <i class="fa fa-search"
+                            style="position: relative; right: 0.5rem; top: 2.2rem; z-index: 33333;"></i>
+                        <!-- </button> -->
+                    </span>
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control" style="padding-right:2rem;">
+                    </div>
+                </form>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="IPS">
+                        <label class="form-check-label mr-3 display" for="IPS">
+                            IPS
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="TFT">
+                        <label class="form-check-label mr-3 display" for="TFT">
+                            TFT
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Super-AMOLED">
+                        <label class="form-check-label mr-3 display" for="Super-AMOLED">
+                            Super AMOLED
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="LCD">
+                        <label class="form-check-label mr-3 display" for="LCD">
+                            LCD
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="AMOLED">
+                        <label class="form-check-label mr-3 display" for="AMOLED">
+                            AMOLED
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="LTPS-IPS">
+                        <label class="form-check-label mr-3 display" for="LTPS-IPS">
+                            LTPS IPS
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Suprt-LCD">
+                        <label class="form-check-label mr-3 display" for="Suprt-LCD">
+                            Suprt LCD
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="PLS TFT">
+                        <label class="form-check-label mr-3 display" for="PLS TFT">
+                            PLS TFT
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Super-LCD3">
+                        <label class="form-check-label mr-3 display" for="Super-LCD3">
+                            Super LCD 3
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Super-LCD2">
+                        <label class="form-check-label mr-3 display" for="Super-LCD2">
+                            Super LCD 2
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="TN">
+                        <label class="form-check-label mr-3 display" for="TN">
+                            TN
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="Dynamic-AMOLED">
+                        <label class="form-check-label mr-3 display" for="Dynamic-AMOLED">
+                            Dynamic AMOLED
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
+                <div id="titleResolution"> رزولوشن عکس:</div>
+                <form id="search‌‌Resolution">
+                    <span class="input-group-append">
+                        <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
+                        <i class="fa fa-search"
+                            style="position: relative; right: 0.5rem; top: 2.2rem; z-index: 33333;"></i>
+                        <!-- </button> -->
+                    </span>
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control" style="padding-right:2rem;">
+                    </div>
+                </form>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="13-Mega-Pixel">
+                        <label class="form-check-label mr-3 resolution" for="13-Mega-Pixel">
+                            13 Mega Pixel
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="5-Mega-Pixel">
+                        <label class="form-check-label mr-3 resolution" for="5-Mega-Pixel">
+                            5 Mega Pixel
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="8-Mega-Pixel">
+                        <label class="form-check-label mr-3 resolution" for="8-Mega-Pixel">
+                            8 Mega Pixel
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="5-Mega-Pixel">
+                        <label class="form-check-label mr-3 resolution" for="5-Mega-Pixel">
+                            5 Mega Pixel
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="2-Mega-Pixel">
+                        <label class="form-check-label mr-3 resolution" for="2-Mega-Pixel">
+                            2 Mega Pixel
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="VGA">
+                        <label class="form-check-label mr-3 resolution" for="VGA">
+                            VGA
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="3.2-Mega-Pixel">
+                        <label class="form-check-label mr-3 resolution" for="3.2-Mega-Pixel">
+                            3.2 Mega Pixel
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="16-Mega-Pixel">
+                        <label class="form-check-label mr-3 resolution" for="16-Mega-Pixel">
+                            16 Mega Pixel
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
+                <div id="titleStorage"> حافظه داخلی:</div>
+                <form id="searchStorage">
+                    <span class="input-group-append">
+                        <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
+                        <i class="fa fa-search"
+                            style="position: relative; right: 0.5rem; top: 2.2rem; z-index: 33333;"></i>
+                        <!-- </button> -->
+                    </span>
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control" style="padding-right:2rem;">
+                    </div>
+                </form>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="16-gig">
+                        <label class="form-check-label mr-3 storage" for="16-gig-ram">
+                            16 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="32-gig">
+                        <label class="form-check-label mr-3 storage" for="32-gig-ram">
+                            32 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="8-gig">
+                        <label class="form-check-label mr-3 storage" for="8-gig-ram">
+                            8 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="64-gig">
+                        <label class="form-check-label mr-3 storage" for="64-gig-ram">
+                            64 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="4-gig">
+                        <label class="form-check-label mr-3 storage" for="4-gig-ram">
+                            4 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="128-gig">
+                        <label class="form-check-label mr-3 storage" for="128-gig-ram">
+                            128 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="256-gig">
+                        <label class="form-check-label mr-3 storage" for="256-gig-ram">
+                            256 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="512-gig">
+                        <label class="form-check-label mr-3 storage" for="512-gig-ram">
+                            512 گیگابایت
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
+                <div id="titleStorage">مقدار RAM:</div>
+                <form id="searchRAM">
+                    <span class="input-group-append">
+                        <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
+                        <i class="fa fa-search"
+                            style="position: relative; right: 0.5rem; top: 2.2rem; z-index: 33333;"></i>
+                        <!-- </button> -->
+                    </span>
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control" style="padding-right:2rem;">
+                    </div>
+                </form>
+                <form action="" method="post">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="16-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="16-gig-ram">
+                            16 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="32-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="32-gig-ram">
+                            32 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="8-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="8-gig-ram">
+                            8 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="64-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="64-gig-ram">
+                            64 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="4-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="4-gig-ram">
+                            4 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="128-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="128-gig-ram">
+                            128 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="256-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="256-gig-ram">
+                            256 گیگابایت
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="" id="512-gig-ram">
+                        <label class="form-check-label mr-3 ram" for="512-gig-ram">
+                            512 گیگابایت
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round">
+                <div class="slider-box">
+                    <label for="priceRange" id="sliderLabel">محدوده قیمت مورد نظر:</label>
+                    <input type="text" id="priceRange" readonly style="background-color: white; border: none;"
+                        dir="ltr">
+                    <div id="price-range" class="slider"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-9">
+            <p style="color: rgba(0, 0, 0, 0.45); font-size: 0.87rem;">فروشگاه اینترنتی دیجی‌کالا / کالای دیجیتال /
+                موبایل</p>
+            <div class="bg-white p-3 filter-list">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+                <span class='filter'>مرنب‌سازی بر اساس:</span>
+                <span class='filter mr-3'>پربازدیدترین</span>
+                <span class='filter mr-3'>پرفروش‌ترین</span>
+                <span class='filter mr-3'>محبوب‌ترین</span>
+                <span class='filter mr-3'>جدیدترین</span>
+                <span class='filter mr-3'>ارزان‌ترین</span>
+                <span class='filter mr-3'>گران‌ترین</span>
+            </div>
+            <div class="row">
+                {% for product in product_list %}
+                <div class="col col-md-3">
+                    <div class="card">
+                        <a href="{% url 'products:laptop_view' product.slug %}"><img class="card-img-top"
+                                src="{{product.image.url}}" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size: 0.85rem; color: rgba(0, 0, 0, 0.5);">
+                                {{product.name}}</h5>
+                            <p class="card-text d-flex justify-content-between">
+                                <span><i class="fa fa-check-circle" aria-hidden="true"
+                                        style="color: seagreen;"></i><span class="mr-1"
+                                        style="font-size: 0.7rem; color:rgba(0, 0, 0, 0.5)">موجود در انبار</span></span>
+                                <span dir="ltr"><i class="fas fa-star" style="color: gold; font-size:0.7rem;"></i><span
+                                        style="font-size:0.7rem;">{{rating|get_rate:product.id}}({{rating|get_rate_count:product.id}})</span></span>
+                            </p>
+                            <p style="font-size: 1rem; text-align: left;">{{prices|get_price:product.id}} تومان</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item shop" style="font-size: 0.85rem;">
+                                <i class="fas fa-shopping-cart" style="color: rgba(0, 0, 0, 0.4);"></i> {{shops|get_item:product.id}} <i class="fas fa-smile" style="color: red;"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>{% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+    integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+    crossorigin="anonymous"></script>
+<script src="{% static 'js/products_list.js' %}"></script>
+<script>
+</script>
+{% endblock script %}
