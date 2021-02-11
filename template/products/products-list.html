@@ -19,7 +19,7 @@
         opacity: 0;
     }
 
-    .card:hover  .shop {
+    .card:hover .shop {
         opacity: 1;
     }
 </style>
@@ -39,10 +39,10 @@
                         کالای دیجیتال
                         <ul style="list-style: inside;" class="mr-3">
                             <li>
-                                موبایل
+                                لپ تاپ
                                 <ul style="list-style: inside;" class="mr-3">
                                     <li>
-                                        گوشی موبایل
+                                        لپ تاپ و الترابوک
                                     </li>
                                 </ul>
                             </li>
@@ -63,141 +63,82 @@
                         <input type="text" class="form-control" style="padding-right:2rem;">
                     </div>
                 </form>
-                <form action="" method="post">
+                <form action="">
+                    {% for brand in brands %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Samsung">
-                        <label class="form-check-label mr-3 brand" for="Samsung">
-                            Samsung
+                        <input class="form-check-input" type="checkbox" value="" id="{{brand.name}}" value="saeed">
+                        <label class="form-check-label mr-3 brand" for="{{brand.name}}">
+                            {{brand.name}}
                         </label>
                     </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Iphone">
-                        <label class="form-check-label mr-3 brand" for="Iphone">
-                            Iphone
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Huawei">
-                        <label class="form-check-label mr-3 brand" for="Huawei">
-                            Huawei
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Honor">
-                        <label class="form-check-label mr-3 brand" for="Honor">
-                            Honor
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="LG">
-                        <label class="form-check-label mr-3 brand" for="LG">
-                            LG
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Xiaomi">
-                        <label class="form-check-label mr-3 brand" for="Xiaomi">
-                            Xiaomi
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Oppo">
-                        <label class="form-check-label mr-3 brand" for="Oppo">
-                            Oppo
-                        </label>
-                    </div>
+                    {% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round">
                 <div>
-                    دوربین‌های پشت گوشی
-                </div>
+                    صفحه نمایش لمسی </div>
                 <hr>
-                <form action="" method="post">
+                <form action="">
+                    {% for touchable in display_touchable %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="one-module">
-                        <label class="form-check-label mr-3" for="onde-module">
-                            ۱ ماژول دوربین
+                        <input class="form-check-input" type="checkbox" value="" id="{{touchable.0}}"
+                            value="1{{touchable.0}}">
+                        <label class="form-check-label mr-3" for="{{touchable.0}}">
+                            {{touchable.0}}
                         </label>
                     </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="two-module">
-                        <label class="form-check-label mr-3" for="two-module">
-                            ۲ ماژول دوربین
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="no-camera">
-                        <label class="form-check-label mr-3" for="no-camera">
-                            بدون دوربین
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="four-module">
-                        <label class="form-check-label mr-3" for="four-module">
-                            ۴ ماژول دوربین
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="three-module">
-                        <label class="form-check-label mr-3" for="three-module">
-                            ۳ ماژول دوربین
-                        </label>
-                    </div>
+                    {% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round">
                 <div>
-                    شبکه‌های ارتباطی
-                </div>
+                    صفحه نمایش مات </div>
                 <hr>
-                <form action="" method="post">
+                <form action="">
+                    {% for display_mate in display_mates %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="2G">
-                        <label class="form-check-label mr-3" for="2G">
-                            2G
+                        <input class="form-check-input" type="checkbox" value="" id="{{display_mate.0}}"
+                            value="1{{display_mate.0}}">
+                        <label class="form-check-label mr-3" for="{{display_mate.0}}">
+                            {{display_mate.0}}
                         </label>
                     </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="3G">
-                        <label class="form-check-label mr-3" for="3G">
-                            3G
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="4G">
-                        <label class="form-check-label mr-3" for="4G">
-                            4G
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="5G">
-                        <label class="form-check-label mr-3" for="5G">
-                            5G
-                        </label>
-                    </div>
+                    {% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round">
-                <div>تعداد سیم‌کارت</div>
+                <div>
+                    سازنده پردازنده گرافیکی
+                </div>
                 <hr>
                 <form action="" method="post">
+                    {% for gpu_manufacturer in gpu_manufacturers %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="one-sim">
-                        <label class="form-check-label mr-3" for="one-sim">
-                            یک
+                        <input class="form-check-input" type="checkbox" value="{{gpu_manufacturer.0}}"
+                            id="{{gpu_manufacturer.0}}">
+                        <label class="form-check-label mr-3" for="{{gpu_manufacturer.0}}">
+                            {{gpu_manufacturer.0}}
                         </label>
                     </div>
+                    {% endfor %}
+                </form>
+            </div>
+            <div class="mt-2 bg-white p-3 round">
+                <div>نوع حافظه رم</div>
+                <hr>
+                <form>
+                    {% for ram_type in ram_types %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="two-sim">
-                        <label class="form-check-label mr-3" for="two-sim">
-                            دو
+                        <input class="form-check-input" type="checkbox" value="{{ram_type.0}}" id="{{ram_type.0}}">
+                        <label class="form-check-label mr-3" for="{{ram_type.0}}">
+                            {{ram_type.0}}
                         </label>
                     </div>
+                    {% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
-                <div id="titleDisplay">فناوری صفحه‌نمایش:</div>
+                <div id="titleDisplay">دقت صفحه نمایش:</div>
                 <form id="search‌‌‌Display">
                     <span class="input-group-append">
                         <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
@@ -209,83 +150,20 @@
                         <input type="text" class="form-control" style="padding-right:2rem;">
                     </div>
                 </form>
-                <form action="" method="post">
+                <form>
+                    {% for display_accuracy in display_accuracies %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="IPS">
-                        <label class="form-check-label mr-3 display" for="IPS">
-                            IPS
+                        <input class="form-check-input" type="checkbox" value="{{display_accuracy.0}}"
+                            id="{{display_accuracy.0}}">
+                        <label class="form-check-label mr-3 display" for="{{display_accuracy.0}}">
+                            {{display_accuracy.0}}
                         </label>
                     </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="TFT">
-                        <label class="form-check-label mr-3 display" for="TFT">
-                            TFT
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Super-AMOLED">
-                        <label class="form-check-label mr-3 display" for="Super-AMOLED">
-                            Super AMOLED
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="LCD">
-                        <label class="form-check-label mr-3 display" for="LCD">
-                            LCD
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="AMOLED">
-                        <label class="form-check-label mr-3 display" for="AMOLED">
-                            AMOLED
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="LTPS-IPS">
-                        <label class="form-check-label mr-3 display" for="LTPS-IPS">
-                            LTPS IPS
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Suprt-LCD">
-                        <label class="form-check-label mr-3 display" for="Suprt-LCD">
-                            Suprt LCD
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="PLS TFT">
-                        <label class="form-check-label mr-3 display" for="PLS TFT">
-                            PLS TFT
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Super-LCD3">
-                        <label class="form-check-label mr-3 display" for="Super-LCD3">
-                            Super LCD 3
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Super-LCD2">
-                        <label class="form-check-label mr-3 display" for="Super-LCD2">
-                            Super LCD 2
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="TN">
-                        <label class="form-check-label mr-3 display" for="TN">
-                            TN
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="Dynamic-AMOLED">
-                        <label class="form-check-label mr-3 display" for="Dynamic-AMOLED">
-                            Dynamic AMOLED
-                        </label>
-                    </div>
+                    {% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
-                <div id="titleResolution"> رزولوشن عکس:</div>
+                <div id="titleResolution">ظرفیت حافظه داخلی:</div>
                 <form id="search‌‌Resolution">
                     <span class="input-group-append">
                         <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
@@ -297,59 +175,19 @@
                         <input type="text" class="form-control" style="padding-right:2rem;">
                     </div>
                 </form>
-                <form action="" method="post">
+                <form action="">
+                    {% for storage in storages %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="13-Mega-Pixel">
-                        <label class="form-check-label mr-3 resolution" for="13-Mega-Pixel">
-                            13 Mega Pixel
+                        <input class="form-check-input" type="checkbox" value="{{storage.0}}" id="{{storage.0}}">
+                        <label class="form-check-label mr-3 resolution" for="{{storage.0}}">
+                            {{storage.0}}
                         </label>
                     </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="5-Mega-Pixel">
-                        <label class="form-check-label mr-3 resolution" for="5-Mega-Pixel">
-                            5 Mega Pixel
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="8-Mega-Pixel">
-                        <label class="form-check-label mr-3 resolution" for="8-Mega-Pixel">
-                            8 Mega Pixel
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="5-Mega-Pixel">
-                        <label class="form-check-label mr-3 resolution" for="5-Mega-Pixel">
-                            5 Mega Pixel
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="2-Mega-Pixel">
-                        <label class="form-check-label mr-3 resolution" for="2-Mega-Pixel">
-                            2 Mega Pixel
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="VGA">
-                        <label class="form-check-label mr-3 resolution" for="VGA">
-                            VGA
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="3.2-Mega-Pixel">
-                        <label class="form-check-label mr-3 resolution" for="3.2-Mega-Pixel">
-                            3.2 Mega Pixel
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="16-Mega-Pixel">
-                        <label class="form-check-label mr-3 resolution" for="16-Mega-Pixel">
-                            16 Mega Pixel
-                        </label>
-                    </div>
+                    {% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
-                <div id="titleStorage"> حافظه داخلی:</div>
+                <div id="titleStorage"> سری پردازنده:</div>
                 <form id="searchStorage">
                     <span class="input-group-append">
                         <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
@@ -361,59 +199,19 @@
                         <input type="text" class="form-control" style="padding-right:2rem;">
                     </div>
                 </form>
-                <form action="" method="post">
+                <form>
+                    {% for cpu_seri in cpu_series %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="16-gig">
-                        <label class="form-check-label mr-3 storage" for="16-gig-ram">
-                            16 گیگابایت
+                        <input class="form-check-input" type="checkbox" value="{{cpu_seri.0}}" id="{{cpu_seri.0}}">
+                        <label class="form-check-label mr-3 storage" for="{{cpu_seri.0}}">
+                            {{cpu_seri.0}}
                         </label>
                     </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="32-gig">
-                        <label class="form-check-label mr-3 storage" for="32-gig-ram">
-                            32 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="8-gig">
-                        <label class="form-check-label mr-3 storage" for="8-gig-ram">
-                            8 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="64-gig">
-                        <label class="form-check-label mr-3 storage" for="64-gig-ram">
-                            64 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="4-gig">
-                        <label class="form-check-label mr-3 storage" for="4-gig-ram">
-                            4 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="128-gig">
-                        <label class="form-check-label mr-3 storage" for="128-gig-ram">
-                            128 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="256-gig">
-                        <label class="form-check-label mr-3 storage" for="256-gig-ram">
-                            256 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="512-gig">
-                        <label class="form-check-label mr-3 storage" for="512-gig-ram">
-                            512 گیگابایت
-                        </label>
-                    </div>
+                    {% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round" style="height: 20rem; overflow: auto; white-space: nowrap;">
-                <div id="titleStorage">مقدار RAM:</div>
+                <div id="titleStorage">ظرفیت حافظه RAM:</div>
                 <form id="searchRAM">
                     <span class="input-group-append">
                         <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
@@ -425,55 +223,15 @@
                         <input type="text" class="form-control" style="padding-right:2rem;">
                     </div>
                 </form>
-                <form action="" method="post">
+
+                <form>
+                    {% for ram in rams %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="16-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="16-gig-ram">
-                            16 گیگابایت
+                        <input class="form-check-input" type="checkbox" value="{{ram.0}}" name="ram" id="{{ram.0}}">
+                        <label class="form-check-label mr-3 ram" for="{{ram.0}}">
+                            {{ram.0}}
                         </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="32-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="32-gig-ram">
-                            32 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="8-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="8-gig-ram">
-                            8 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="64-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="64-gig-ram">
-                            64 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="4-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="4-gig-ram">
-                            4 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="128-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="128-gig-ram">
-                            128 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="256-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="256-gig-ram">
-                            256 گیگابایت
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="512-gig-ram">
-                        <label class="form-check-label mr-3 ram" for="512-gig-ram">
-                            512 گیگابایت
-                        </label>
-                    </div>
+                    </div>{% endfor %}
                 </form>
             </div>
             <div class="mt-2 bg-white p-3 round">
@@ -498,7 +256,7 @@
                 <span class='filter mr-3'>ارزان‌ترین</span>
                 <span class='filter mr-3'>گران‌ترین</span>
             </div>
-            <div class="row">
+            <div class="row product_list">
                 {% for product in product_list %}
                 <div class="col col-md-3">
                     <div class="card">
@@ -517,12 +275,14 @@
                             <p style="font-size: 1rem; text-align: left;">{{prices|get_price:product.id}} تومان</p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item shop" style="font-size: 0.85rem;">
-                                <i class="fas fa-shopping-cart" style="color: rgba(0, 0, 0, 0.4);"></i> {{shops|get_item:product.id}} <i class="fas fa-smile" style="color: red;"></i>
+                                    <i class="fas fa-shopping-cart" style="color: rgba(0, 0, 0, 0.4);"></i>
+                                    {{shops|get_item:product.id}} <i class="fas fa-smile" style="color: red;"></i>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </div>{% endfor %}
+                </div>
+                {% endfor %}
 
 
             </div>
@@ -542,5 +302,70 @@
     crossorigin="anonymous"></script>
 <script src="{% static 'js/products_list.js' %}"></script>
 <script>
+    // Select all checkboxes with the name 'settings' using querySelectorAll.
+    var checkboxes = document.querySelectorAll("input[type=checkbox][name=ram]");
+    let enabledSettings = []
+
+    /*
+    For IE11 support, replace arrow functions with normal functions and
+    use a polyfill for Array.forEach:
+    https://vanillajstoolkit.com/polyfills/arrayforeach/
+    */
+
+    // Use Array.forEach to add an event listener to each checkbox.
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            enabledSettings =
+                Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+                    .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+                    .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+
+            console.log(enabledSettings)
+            $.ajax({
+                type: "get",
+                url: "{% url 'products:products_list' cat %}",
+                data: {
+                    ram: enabledSettings,
+                },
+                dataType: 'JSON',
+                success: function (response) {
+                    $(".product_list").empty();
+
+                    for (i = 0; i < response['product_ids'].length; i++) {
+                        p_id = response['product_ids'][i];
+                        var url_mask = "{% url 'products:laptop_view' slug=12345 %}".replace(/12345/, response['product_list'][p_id][2].toString());
+                        $('.product_list').append(`<div class="col col-md-3">
+                    <div class="card">
+                        <a href="${url_mask}"><img class="card-img-top"
+                                src="${response['product_list'][p_id][1]}" alt="Card image cap"></a>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size: 0.85rem; color: rgba(0, 0, 0, 0.5);">
+                                ${response['product_list'][p_id][0]}</h5>
+                            <p class="card-text d-flex justify-content-between">
+                                <span><i class="fa fa-check-circle" aria-hidden="true"
+                                        style="color: seagreen;"></i><span class="mr-1"
+                                        style="font-size: 0.7rem; color:rgba(0, 0, 0, 0.5)">موجود در انبار</span></span>
+                                <span dir="ltr"><i class="fas fa-star" style="color: gold; font-size:0.7rem;"></i>${response['rating_dictionary'][p_id][0]} (${response['rating_dictionary'][p_id][1]})<span
+                                        style="font-size:0.7rem;"></span></span>
+                            </p>
+                            <p style="font-size: 1rem; text-align: left;">${response['prices'][p_id]} تومان</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item shop" style="font-size: 0.85rem;">
+                                    <i class="fas fa-shopping-cart" style="color: rgba(0, 0, 0, 0.4);"></i>
+                                   ${response['shops'][p_id]} <i class="fas fa-smile" style="color: red;"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>`);
+                    }
+                },
+                error: function () { alert('error in searching') }
+            });
+        })
+    });
+
+
+
 </script>
 {% endblock script %}

@@ -29,16 +29,16 @@ $(function () {
     });
     $("#priceRange").val($("#price-range").slider("values", 0) + " - " + $("#price-range").slider("values", 1));
 
-    $.ajax({
+    // $.ajax({
 
-        type: "POST",
-        url: "your.php",
-        data: "vote=" + $("#slider-range-max").slider("value"),
-        success: function (response) {
-            alert(voted);
+    //     type: "POST",
+    //     url: "your.php",
+    //     data: "vote=" + $("#slider-range-max").slider("value"),
+    //     success: function (response) {
+    //         alert(voted);
 
-        },
+    //     },
 
-    })
+    // })
 });
 

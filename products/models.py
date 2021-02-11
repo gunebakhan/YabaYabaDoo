@@ -27,10 +27,13 @@ class Category(models.Model):
         return self.name
 
 
+DEFAULT_CAT_ID = 1
 class Brand(models.Model):
 
     name = models.CharField(_("Name"), max_length=50, db_index=True)
     slug = models.SlugField(_("Slug"), max_length=200, unique=True)
+    product_type = models.ForeignKey("Category", verbose_name=_(
+        "Product Type"), on_delete=models.CASCADE, blank=True, null=True)
     create = models.DateTimeField(_("Create"), auto_now=False, auto_now_add=True)
     update = models.DateTimeField(_("Update"), auto_now=True, auto_now_add=False)
     details = models.TextField(_("Details"))
@@ -96,6 +99,11 @@ class ProductMeta(models.Model):
     gpu_manufacturer = models.CharField(_("GPU Manufacturer"), max_length=50, default="None")
     gpu_model = models.CharField(_("GPU Model"), max_length=50, default="None")
     gpu_ram = models.CharField(_("GPU RAM"), max_length=50, default="None")
+    display_size = models.CharField(_("Display Size"), max_length=50, default='None')
+    display_type = models.CharField(_("Display Type"), max_length=50, default="None")
+    display_accuracy = models.CharField(_("Display Accuracy"), max_length=50, default="None")
+    display_mate = models.BooleanField(_("Display Mate"), default=False)
+    display_touchable = models.BooleanField(_("Display Touchable"), default=False)
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
 
@@ -105,6 +113,79 @@ class ProductMeta(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+class MobileMeta(models.Model):
+    SLOT_CHOICES = (
+        (('دارد'), ('دارد')),
+        (('ندارد'), ('ندارد')),
+    )
+
+    YES_NO_CHOICES = (
+        (('بلی'), ('بلی')),
+        (('خیر'), ('خیر')),
+    )
+    product = models.ForeignKey(Product, verbose_name=_(
+        "product"), on_delete=models.CASCADE, related_name='mobile_meta', related_query_name='mobile_meta')
+
+    size = models.CharField(_("Size"), max_length=50)
+    sim_card_desc = models.CharField(_("Sim Card Descrioption"), max_length=50)
+    weight = models.CharField(_("Weight"), max_length=50)
+    body_structure = models.CharField(_("Body Structur"), max_length=50)
+    special_properties = models.CharField(_("Special Properties"), max_length=50)
+    num_sim_cards = models.CharField(_("Num of Sim Cards"), max_length=50)
+    intro_date = models.DateTimeField(_("Introduction Date"), auto_now=False, auto_now_add=False)
+    slot_for_sim = models.CharField(_("Slot For Sim"), max_length=50, choices=SLOT_CHOICES)
+    model = models.CharField(_("Model"), max_length=50)
+    cpu_chipset = models.CharField(_("CPU Chipset"), max_length=250)
+    cpu = models.CharField(_("CPU"), max_length=250)
+    cpu_type = models.CharField(_("CPU Type"), max_length=50)
+    cpu_freequency = models.CharField(_("CPU Frequency"), max_length=50)
+    gpu = models.CharField(_("GPU"), max_length=50)
+    ram = models.CharField(_("RAM"), max_length=50)
+    ram_capacity = models.CharField(_("RAM Capacity"), max_length=50)
+    side_storage = models.CharField(_("Side Storage"), max_length=50)
+    side_storage_standard = models.CharField(_("Side Storage Standard"), max_length=50)
+    colorful_display = models.CharField(_("Colorful Storage"), max_length=50, choices=YES_NO_CHOICES)
+    touchable_display = models.CharField(_("Touchable Display"), max_length=50, choices=YES_NO_CHOICES)
+    display_techno = models.CharField(_("Display Techni"), max_length=50)
+    display_size_range = models.CharField(_("Display Size Range"), max_length=50)
+    display_size = models.CharField(_("Display Size"), max_length=50)
+    resolution = models.CharField(_("Resolution"), max_length=50)
+    pixel_density = models.CharField(_("Pixel Density"), max_length=50)
+    display_to_body = models.CharField(_("Display to Body"), max_length=50)
+    display_ratio = models.CharField(_("Display Ratio"), max_length=50)
+    networks = models.CharField(_("Networks"), max_length=50)
+    network_2g = models.CharField(_("2G Network"), max_length=250)
+    network_3g = models.CharField(_("3G Network"), max_length=250)
+    network_4g = models.CharField(_("4G Network"), max_length=250)
+    connection_technology = models.CharField(_("Connection Technology"), max_length=250)
+    wifi = models.CharField(_("Wi-Fi"), max_length=250)
+    bluetooth = models.CharField(_("Bluetooth"), max_length=250)
+    location_techno = models.CharField(_("Location Technology"), max_length=250)
+    port = models.CharField(_("Port"), max_length=250)
+    back_camera_modules = models.CharField(_("Back Camera Modules"), max_length=50)
+    image_resolution = models.CharField(_("Image Resolution"), max_length=50)
+    flash = models.CharField(_("Flash"), max_length=50)
+    camera_capabalities = models.TextField(_("Camera Capabalities"))
+    filming = models.CharField(_("Filming"), max_length=250)
+    selfie_camera = models.CharField(_("Selfie Camera"), max_length=1024)
+    speaker = models.CharField(_("Speaker"), max_length=50, choices=YES_NO_CHOICES)
+    voice_output = models.CharField(_("Voice Output"), max_length=50)
+    os = models.CharField(_("OS"), max_length=50)
+    os_release = models.CharField(_("OS Realease"), max_length=50)
+    software_capabalities = models.TextField(_("Software Capabalities"))
+    created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True, null=True, blank=True)
+    updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False, null=True, blank=True)
+
+
+    class Meta:
+        verbose_name = _("MobileMeta")
+        verbose_name_plural = _("MobileMetas")
+
+    def __str__(self):
+        return self.product.name
+
 
 
 

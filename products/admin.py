@@ -14,7 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class BrandAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'create', 'update')
     search_fields = ('name', 'slug')
-    list_display = ('create', 'update')
+    list_filter = ('create', 'update')
 
 
 @admin.register(ImageGallery)
@@ -33,6 +33,13 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductMeta)
 class ProductMetaAdmin(admin.ModelAdmin):
+    list_display = ('product', 'updated')
+    search_fields = ('product', )
+    list_filter = ('created', 'updated')
+
+
+@admin.register(MobileMeta)
+class MobileMetaAdmin(admin.ModelAdmin):
     list_display = ('product', 'updated')
     search_fields = ('product', )
     list_filter = ('created', 'updated')
