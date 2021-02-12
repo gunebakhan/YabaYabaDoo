@@ -357,11 +357,7 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
             except Exception:
                 rating_dictionary[f"{product.id}"] = (
                     comments.count(), 0)
-            print('zero')
 
-        # print(rating_dictionary)
-        # print(serializers.)
-        # print(shops)
         product_name_image = {}
         for product in product_list:
             product_name_image[f"{product.id}"] = (product.name, product.image.url, product.slug)
@@ -376,7 +372,6 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
             'product_ids': product_ids,
         }
         return self.render_json_response(data)
-        # return HttpResponse('hi')
 
     # def get(self, request, *args, **kwargs):
     #     self.object_list = self.get_queryset()

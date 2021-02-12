@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.views.generic import CreateView, TemplateView
-from .forms import SignUpForm
+from django.views.generic import CreateView, TemplateView, UpdateView, DetailView
+from .forms import SignUpForm, UserProfileForm
 from django.urls import reverse_lazy
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -9,6 +9,9 @@ from .tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
+from django.contrib.auth.mixins import AccessMixin
 
 User = get_user_model()
 
@@ -25,6 +28,7 @@ class SignUpView(CreateView):
             return self.form_valid(form)
         else:
             return render(self.request, "user/register.html", {"form": self.get_form()})
+
     def form_valid(self, form):
         form = form.save(commit=False)
         form.is_active = False
@@ -39,7 +43,7 @@ class SignUpView(CreateView):
         })
         form.email_user(subject=subject, message=message)
         return HttpResponse('ثبت نام با موفقیت انجام پذیرفت. لینک فعالسازی به ایمیلتان ارسال گردید.')
-    
+
     def form_invalid(self, form):
         return super().form_invalid(form)
 
@@ -59,6 +63,36 @@ def activate(request, uidb64, token):
 
 
 class Login(LoginView):
-    
+
     template_name = "user/login.html"
     redirect_field_name = "home"
+
+
+class ProfileView(LoginRequiredMixin, AccessMixin, DetailView):
+    template_name = 'user/profile.html'
+    model = User
+    permission_denied_message = "اجازه دسترسی به این صفحه را ندارید."
+    raise_exception = True
+
+    def dispatch(self, request, *args, **kwargs):
+        print(request.user.id)
+        if int(request.user.id) != int(self.kwargs['pk']):
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
+
+class EditUserProfileView(LoginRequiredMixin, AccessMixin, UpdateView):
+    template_name = "user/edit_profile.html"
+    model = User
+    form_class = UserProfileForm
+    permission_denied_message = "اجازه دسترسی به این صفحه را ندارید."
+    raise_exception = True
+
+    def dispatch(self, request, *args, **kwargs):
+        print(request.user.id)
+        if int(request.user.id) != int(self.kwargs['pk']):
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse("profile", kwargs={'pk': self.kwargs['pk']})

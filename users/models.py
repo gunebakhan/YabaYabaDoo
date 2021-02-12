@@ -115,7 +115,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
-    avatar = models.ImageField(_("avatar"), upload_to='user/avatars', blank=True, )
+    avatar = models.ImageField(_("avatar"), upload_to='user/avatars', default='user/avatars/defaul-img.jpg')
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     
     EMAIL_FIELD = 'email'
@@ -192,7 +192,7 @@ class Address(models.Model):
 ########################## Email ##################################3
 class Email(models.Model):
 
-    author = models.ForeignKey("User", verbose_name=_("Author"), on_delete=models.CASCADE, related_name='mailing', related_query_name='mailing')
+    author = models.ForeignKey(User, verbose_name=_("Author"), on_delete=models.CASCADE, related_name='mailing', related_query_name='mailing')
     subject = models.CharField(_("Subject"), max_length=150, db_index=True)
     body = models.TextField(_("Body"))
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
@@ -206,3 +206,22 @@ class Email(models.Model):
 
     def __str__(self):
         return self.subject
+
+
+############################3 Profile Model ###########################
+# class UserProfile(models.Model):
+
+#     user = models.OneToOneField(User, verbose_name=_("User"), on_delete=models.CASCADE, related_name='profiles')
+#     address = models.ForeignKey(Address, verbose_name=_("Address"), on_delete=models.CASCADE, related_name='profiles')
+#     emails = models.ForeignKey(Email, verbose_name=_("Email"), on_delete=models.CASCADE, related_name='profiles')
+#     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
+#     updated = models.DateTimeField(_("Updated"), auto_now=True, auto_now_add=False)
+
+#     class Meta:
+#         verbose_name = _("UserProfile")
+#         verbose_name_plural = _("UserProfiles")
+
+#     def __str__(self):
+#         return self.user.get_full_name()
+
+

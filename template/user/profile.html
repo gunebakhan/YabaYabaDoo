@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+<style>
+
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="container-fluid mx-3 my-3" style="text-align: right;">
+    <div class="row">
+        <div class="col col-md-3 bg-white">
+            <img class="w-50 rounded" src="{{user.avatar.url}}" alt="">
+            <p>{{user.get_full_name}}</p>
+            <p>نام کاربری: {{user.username}}</p>
+            <hr>
+        </div>
+        <div class="col col-md-8 mr-2">
+            <h6>اطلاعات شخصی</h6>
+            <div class="box bg-white">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>نام و نام خانوادگی:</td>
+                            <td>{{user.get_full_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>پست الکترونیک</td>
+                            <td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>شماره تلفن همراه</td>
+                            <td>{{user.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td>پست الکترونیک</td>
+                            <td>{{user.date_joined|date}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{% url 'edit_profile' user.pk %}" class="btn btn-primary w-100">ویرایش اطلاعات کاربری</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
