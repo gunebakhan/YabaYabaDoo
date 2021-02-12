@@ -19,8 +19,12 @@ from django.db.models import Min
 from django.db.models import Prefetch
 from django.utils.decorators import method_decorator
 from django.core import serializers
+from django.db.models import Q
+
 
 # Create your views here.
+
+
 class AjaxableResponseMixin:
     def render_to_json_response(self, context, **response_kwargs):
         """Render a json response of context."""
@@ -268,20 +272,70 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
         return ordering
 
     def get_ajax(self, request, *args, **kwargs):
-        ram = request.GET.getlist('ram[]', None)
+        data = request.GET.getlist('data[]', None)
+        search_fields = {'brand': [], 'touch': [], 'mate': [], 'gpu': [], 'ramType': [
+        ], 'resolution': [], 'storage': [], 'ramCapacity': [], 'cpu': []}
 
-        # product_list = ProductMeta.objects.filter(
-        #     ram_capacity=ram[0]).product.all()
-        if ram:
-            product_list = ProductMeta.objects.filter(ram_capacity__in=ram).values_list('product', flat=True)
-            product_list = Product.objects.filter(pk__in=product_list)
-        else:
-            product_list = Product.objects.all()
+        for datum in data:
+            if datum.startswith('brand'):
+                search_fields['brand'].append(datum.split('_')[1])
+            elif datum.startswith('touch'):
+                search_fields['touch'].append(datum.split('_')[1] == 'True')
+            elif datum.startswith('mate'):
+                search_fields['mate'].append(datum.split('_')[1])
+            elif datum.startswith('gpu'):
+                search_fields['gpu'].append(datum.split('_')[1])
+            elif datum.startswith('ramType'):
+                search_fields['ramType'].append(datum.split('_')[1])
+            elif datum.startswith('resolution'):
+                search_fields['resolution'].append(datum.split('_')[1])
+            elif datum.startswith('storage'):
+                search_fields['storage'].append(datum.split('_')[1])
+            elif datum.startswith('ramCapacity'):
+                search_fields['ramCapacity'].append(datum.split('_')[1])
+            elif datum.startswith('cpu'):
+                search_fields['cpu'].append(datum.split('_')[1])
 
-        # context['product_list'] = product_list
-        # print(list(product_list))
-        print(product_list.count())
+        # print(search_fields)
+        product_list = ProductMeta.objects.all()
+        if search_fields.get('gpu', None):
+            # print(search_fields.get('gpu', None))
+            product_list = product_list.filter(
+                gpu_manufacturer__in=search_fields['gpu'])
+            # print(product_list.count())
+        if search_fields.get('ramType', None):
+            product_list = product_list.filter(ram_type__in=search_fields['ramType'])
+            # print(product_list.count())
         
+        if search_fields.get('resolution', None):
+            product_list = product_list.filter(display_accuracy__in=search_fields['resolution'])
+            # print(product_list.count())
+        
+        if search_fields.get('storage', None):
+            product_list = product_list.filter(storage__in=search_fields['storage'])
+            # print(product_list.count())
+        
+        if search_fields.get('ramCapacity', None):
+            product_list = product_list.filter(ram_capacity__in=search_fields['ramCapacity'])
+            print(product_list.count())
+        
+        if search_fields.get('cpu', None):
+            product_list = product_list.filter(cpu_series__in=search_fields['cpu'])
+            # print(product_list.count())
+        
+        if search_fields.get('touch', None):
+            product_list = product_list.filter(display_touchable__in=search_fields['touch'])
+        if search_fields.get('mate', None):
+            product_list = product_list.filter(
+                display_mate__in=search_fields['mate'])
+
+        product_list = product_list.values_list('product', flat=True)
+        product_list = Product.objects.filter(pk__in=product_list)
+        if search_fields.get('brand', None):
+            brands = Brand.objects.filter(name__in=search_fields['brand'])
+            product_list = product_list.filter(brand__in=brands)
+        print(product_list.count())
+
         rating_dictionary = {}
         prices = {}
         shops = {}
@@ -303,7 +357,7 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
             except Exception:
                 rating_dictionary[f"{product.id}"] = (
                     comments.count(), 0)
-                # print('zero')
+            print('zero')
 
         # print(rating_dictionary)
         # print(serializers.)
@@ -312,7 +366,6 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
         for product in product_list:
             product_name_image[f"{product.id}"] = (product.name, product.image.url, product.slug)
 
-            
         product_list = serializers.serialize('json', product_list)
         data = {
             'product_list': product_name_image,
@@ -323,7 +376,7 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
             'product_ids': product_ids,
         }
         return self.render_json_response(data)
-            
+        # return HttpResponse('hi')
 
     # def get(self, request, *args, **kwargs):
     #     self.object_list = self.get_queryset()
@@ -335,11 +388,11 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
     #         #     ram_capacity=ram[0]).product.all()
     #         product_list = ProductMeta.objects.filter(ram_capacity=ram[0]).values_list('product', flat=True)
     #         product_list = Product.objects.filter(pk__in=product_list)
-            
+
     #         context['product_list'] = product_list
     #         for p in context['product_list']:
     #             print(p.slug)
-            
+
     #         return super().get(request, *args, **kwargs)
     #         # return self.render_to_response(context)
     #         # return HttpResponse('hi')

@@ -66,7 +66,7 @@
                 <form action="">
                     {% for brand in brands %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="{{brand.name}}" value="saeed">
+                        <input class="form-check-input" type="checkbox" value="brand_{{brand.name}}"" id="{{brand.name}}" value="saeed">
                         <label class="form-check-label mr-3 brand" for="{{brand.name}}">
                             {{brand.name}}
                         </label>
@@ -81,7 +81,7 @@
                 <form action="">
                     {% for touchable in display_touchable %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="{{touchable.0}}"
+                        <input class="form-check-input" type="checkbox" value="touch_{{touchable.0}}" id="{{touchable.0}}"
                             value="1{{touchable.0}}">
                         <label class="form-check-label mr-3" for="{{touchable.0}}">
                             {{touchable.0}}
@@ -97,7 +97,7 @@
                 <form action="">
                     {% for display_mate in display_mates %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="{{display_mate.0}}"
+                        <input class="form-check-input" type="checkbox" value="mate_{{display_mate.0}}"" id="{{display_mate.0}}"
                             value="1{{display_mate.0}}">
                         <label class="form-check-label mr-3" for="{{display_mate.0}}">
                             {{display_mate.0}}
@@ -114,7 +114,7 @@
                 <form action="" method="post">
                     {% for gpu_manufacturer in gpu_manufacturers %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="{{gpu_manufacturer.0}}"
+                        <input class="form-check-input" type="checkbox" value="gpu_{{gpu_manufacturer.0}}"
                             id="{{gpu_manufacturer.0}}">
                         <label class="form-check-label mr-3" for="{{gpu_manufacturer.0}}">
                             {{gpu_manufacturer.0}}
@@ -129,7 +129,7 @@
                 <form>
                     {% for ram_type in ram_types %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="{{ram_type.0}}" id="{{ram_type.0}}">
+                        <input class="form-check-input" type="checkbox" value="ramType_{{ram_type.0}}" id="{{ram_type.0}}">
                         <label class="form-check-label mr-3" for="{{ram_type.0}}">
                             {{ram_type.0}}
                         </label>
@@ -153,7 +153,7 @@
                 <form>
                     {% for display_accuracy in display_accuracies %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="{{display_accuracy.0}}"
+                        <input class="form-check-input" type="checkbox" value="resolution_{{display_accuracy.0}}"
                             id="{{display_accuracy.0}}">
                         <label class="form-check-label mr-3 display" for="{{display_accuracy.0}}">
                             {{display_accuracy.0}}
@@ -178,7 +178,7 @@
                 <form action="">
                     {% for storage in storages %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="{{storage.0}}" id="{{storage.0}}">
+                        <input class="form-check-input" type="checkbox" value="storage_{{storage.0}}" id="{{storage.0}}">
                         <label class="form-check-label mr-3 resolution" for="{{storage.0}}">
                             {{storage.0}}
                         </label>
@@ -202,7 +202,7 @@
                 <form>
                     {% for cpu_seri in cpu_series %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="{{cpu_seri.0}}" id="{{cpu_seri.0}}">
+                        <input class="form-check-input" type="checkbox" value="cpu_{{cpu_seri.0}}" id="{{cpu_seri.0}}">
                         <label class="form-check-label mr-3 storage" for="{{cpu_seri.0}}">
                             {{cpu_seri.0}}
                         </label>
@@ -227,7 +227,7 @@
                 <form>
                     {% for ram in rams %}
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="{{ram.0}}" name="ram" id="{{ram.0}}">
+                        <input class="form-check-input" type="checkbox" value="ramCapacity_{{ram.0}}" name="ram" id="{{ram.0}}">
                         <label class="form-check-label mr-3 ram" for="{{ram.0}}">
                             {{ram.0}}
                         </label>
@@ -303,7 +303,7 @@
 <script src="{% static 'js/products_list.js' %}"></script>
 <script>
     // Select all checkboxes with the name 'settings' using querySelectorAll.
-    var checkboxes = document.querySelectorAll("input[type=checkbox][name=ram]");
+    var checkboxes = document.querySelectorAll("input[type=checkbox]");
     let enabledSettings = []
 
     /*
@@ -325,7 +325,7 @@
                 type: "get",
                 url: "{% url 'products:products_list' cat %}",
                 data: {
-                    ram: enabledSettings,
+                    data: enabledSettings,
                 },
                 dataType: 'JSON',
                 success: function (response) {
@@ -360,7 +360,7 @@
                 </div>`);
                     }
                 },
-                error: function () { alert('error in searching') }
+                error: function () { console.log('error in searching') }
             });
         })
     });
