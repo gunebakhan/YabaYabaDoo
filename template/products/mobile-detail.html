@@ -5,7 +5,7 @@
 <h3>مشخصات فنی</h3>
 <div class="d-flex">
     <div class="triangle"></div>
-    <div class="">مشخصات فیزیکی</div>
+    <div class="">مشخصات کلی</div>
 </div>
 <div>
     <table class="table table-bordered">
@@ -16,39 +16,59 @@
 
             </tr>
             <tr>
+                <th scope="row">توضیحات سیم کارت</th>
+                <td>{{meta.sim_card_desc}}</td>
+            </tr>
+            <tr>
                 <th scope="row">وزن</th>
                 <td>{{meta.weight}}</td>
             </tr>
+            <tr>
+                <th scope="row">ویژگی‌های خاص</th>
+                <td>{{meta.special_properties}}</td>
+            </tr>
+            <tr>
+                <th scope="row">تعداد سیم کارت</th>
+                <td>{{meta.num_sim_cards}}</td>
+            </tr>
+            <tr>
+                <th scope="row">زمان معرفی</th>
+                <td>{{meta.intro_date|date}}</td>
+            </tr>
+            <tr>
+                <th scope="row">شیار مجزا برای کارت حافظه</th>
+                <td>{{meta.slot_for_sim}}</td>
+            </tr>
+            <tr>
+                <th scope="row">مدل</th>
+                <td>{{meta.model}}</td>
+            </tr>
         </tbody>
     </table>
 </div>
 <div class="d-flex mt-5">
     <div class="triangle"></div>
-    <div class="">پردازنه مرکزی</div>
+    <div class="">پردازنه </div>
 </div>
 <div>
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <th scope="row">سازنده پردازنده</th>
-                <td>{{meta.cpu_manufacturer}}</td>
+                <th scope="row">تراشه</th>
+                <td>{{meta.cpu_chipset}}</td>
 
             </tr>
             <tr>
-                <th scope="row">سری پردازنده</th>
-                <td>{{meta.cpu_series}}</td>
+                <th scope="row">پردازنده مرکزی</th>
+                <td>{{meta.cpu}}</td>
             </tr>
             <tr>
-                <th scope="row">مدل پردازنده</th>
-                <td>{{meta.cpu_model}}</td>
+                <th scope="row">نوع پردازنده</th>
+                <td>{{meta.cpu_type}}</td>
             </tr>
             <tr>
-                <th scope="row">فرکانس پردازنده</th>
-                <td>{{meta.cpu_speed}}</td>
-            </tr>
-            <tr>
-                <th scope="row">حافظه Cache</th>
-                <td>{{meta.cach}}</td>
+                <th scope="row">فرکانس پردازنده مرکزی</th>
+                <td>{{meta.cpu_freequency}}</td>
             </tr>
         </tbody>
     </table>
@@ -56,66 +76,32 @@
 
 <div class="d-flex mt-5">
     <div class="triangle"></div>
-    <div class="">حافظه رم</div>
+    <div class="">حافظه </div>
 </div>
 <div>
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <th scope="row">ظرفیت حافظه RAM</th>
+                <th scope="row">حافظه داخلی</th>
+                <td>{{meta.ram}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">مقدار رم</th>
                 <td>{{meta.ram_capacity}}</td>
-
             </tr>
             <tr>
-                <th scope="row">نوع حافظه RAM</th>
-                <td>{{meta.ram_type}}</td>
+                <th scope="row">پشتیبانی از کارت حافظه جانبی</th>
+                <td>{{meta.side_storage}}</td>
+            </tr>
+            <tr>
+                <th scope="row">استاندارد کارت حافظه</th>
+                <td>{{meta.side_storage_standard}}</td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<div class="d-flex mt-5">
-    <div class="triangle"></div>
-    <div class="">حافظه داخلی</div>
-</div>
-<div>
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <th scope="row">ظرفیت حافظه داخلی</th>
-                <td>{{meta.storage}}</td>
-
-            </tr>
-            <tr>
-                <th scope="row">نوع حافظه داخلی</th>
-                <td>{{meta.storage_type}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div class="d-flex mt-5">
-    <div class="triangle"></div>
-    <div class=""> پردازنده گرافیکی</div>
-</div>
-<div>
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <th scope="row"> سازنده پردازنده گرافیکی </th>
-                <td>{{meta.gpu_manufacturer}}</td>
-
-            </tr>
-            <tr>
-                <th scope="row">مدل پردازنده گرافیکی</th>
-                <td>{{meta.gpu_model}}</td>
-            </tr>
-            <tr>
-                <th scope="row">حافظه پردازنده گرافیکی</th>
-                <td>{{meta.gpu_ram}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 <div class="d-flex mt-5">
     <div class="triangle"></div>
     <div class="">صفحه نمایش</div>
@@ -124,29 +110,172 @@
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <th scope="row"> اندازه صفحه نمایش</th>
-                <td>{{meta.display_size}}</td>
+                <th scope="row">صفحه نمایش رنگی</th>
+                <td>{{meta.colorful_display}}</td>
 
             </tr>
             <tr>
-                <th scope="row">نوع صفحه نمایش</th>
-                <td>{{meta.display_type}}</td>
-            </tr>
-            <tr>
-                <th scope="row">دقت صفحه نمایش</th>
-                <td>{{meta.display_accuracy}}</td>
-            </tr>
-            <tr>
-                <th scope="row">صفحه نمایش مات</th>
-                <td>{{meta.display_mate}}</td>
-            </tr>
-            <tr>
                 <th scope="row">صفحه نمایش لمسی</th>
-                <td>{{meta.display_touchable}}</td>
+                <td>{{meta.touchable_display}}</td>
             </tr>
             <tr>
-                <th scope="row">دقت صفحه نمایش</th>
-                <td>{{meta.display_accuracy}}</td>
+                <th scope="row">فناوری صفحه‌نمایش</th>
+                <td>{{meta.display_techno}}</td>
+            </tr>
+            <tr>
+                <th scope="row">بازه‌ی اندازه صفحه نمایش</th>
+                <td>{{meta.display_size_range}}</td>
+            </tr>
+            <tr>
+                <th scope="row">اندازه</th>
+                <td>{{meta.display_size}}</td>
+            </tr>
+            <tr>
+                <th scope="row">رزولوشن</th>
+                <td>{{meta.resolution}}</td>
+            </tr>
+            <tr>
+                <th scope="row">تراکم پیکسلی
+                </th>
+                <td>{{meta.pixel_density}}</td>
+            </tr>
+            <tr>
+                <th scope="row">نسبت صفحه‌نمایش به بدنه</th>
+                <td>{{meta.display_to_body}}</td>
+            </tr>
+            <tr>
+                <th scope="row">نسبت تصویر</th>
+                <td>{{meta.display_ratio}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">ارتباطات</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row"> شبکه های ارتباطی </th>
+                <td>{{meta.networks}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">شبکه 2G</th>
+                <td>{{meta.network_2g}}</td>
+            </tr>
+            <tr>
+                <th scope="row">شبکه 3G</th>
+                <td>{{meta.network_3g}}</td>
+            </tr>
+            <tr>
+                <th scope="row">شبکه 4G</th>
+                <td>{{meta.network_4g}}</td>
+            </tr>
+            <tr>
+                <th scope="row">فن‌آوری‌های ارتباطی</th>
+                <td>{{meta.connection_technology}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Wi-Fi</th>
+                <td>{{meta.wifi}}</td>
+            </tr>
+            <tr>
+                <th scope="row">بلوتوث</th>
+                <td>{{meta.bluetooth}}</td>
+            </tr>
+            <tr>
+                <th scope="row">فن‌آوری مکان‌یابی</th>
+                <td>{{meta.location_techno}}</td>
+            </tr>
+            <tr>
+                <th scope="row">درگاه ارتباطی</th>
+                <td>{{meta.port}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">دوربین</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row"> دوربین‌های پشت گوشی</th>
+                <td>{{meta.back_camera_modules}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">رزولوشن عکس</th>
+                <td>{{meta.image_resolution}}</td>
+            </tr>
+            <tr>
+                <th scope="row">فلش</th>
+                <td>{{meta.flash}}</td>
+            </tr>
+            <tr>
+                <th scope="row">قابلیت‌های دوربین</th>
+                <td>{{meta.camera_capabalities}}</td>
+            </tr>
+            <tr>
+                <th scope="row">فیلمبرداری</th>
+                <td>{{meta.filming}}</td>
+            </tr>
+            <tr>
+                <th scope="row">دوربین سلفی</th>
+                <td>{{meta.selfie_camera}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">صدا</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row"> بلندگو</th>
+                <td>{{meta.speaker}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">خروجی صدا</th>
+                <td>{{meta.image_resolution}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">امکانات نرم افزاری
+</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row"> سیستم عامل
+</th>
+                <td>{{meta.os}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">نسخه سیستم عامل
+</th>
+                <td>{{meta.os_release}}</td>
+            </tr>
+            <tr>
+                <th scope="row">قابلیت‌های نرم‌افزاری
+                </th>
+                <td>{{meta.software_capabalities}}</td>
             </tr>
         </tbody>
     </table>
