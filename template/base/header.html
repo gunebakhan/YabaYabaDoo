@@ -9,7 +9,7 @@
                             <span class="input-group-append">
                                 <!-- <button class="btn btn-outline-red border border-left-0" type="button"> -->
                                 <i class="fa fa-search"
-                                    style="position: relative; right: 1.4rem; top: 0.75rem; z-index: 33333;"></i>
+                                    style="position: relative; right: 1.4rem; top: 0.75rem; z-index: 333;"></i>
                                 <!-- </button> -->
                             </span>
                             <input type="text" class="form-control form-control-lg border dropdown"
@@ -42,19 +42,30 @@
             </nav>
         </div>
         <div class="col col-sm-12 col-md-3 d-flex justify-content-end mt-3 mb-5">
-           {% if user.is_authenticated %}
-            <a href="#" class="btn btn-white btn-lg border rounded p-3">
+            {% if user.is_authenticated %}
+            <div class="dropdown" style="z-index: 3333;">
+                <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-user" id="user"></i> <!-- uses regular style -->
+                    &nbsp; {{user.get_full_name}} </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'profile' user.id %}" >پروفایل</a>
+                    <a class="dropdown-item" href="{% url 'password_reset' %}">تغییر رمز عبور</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">خروج</a>
+                </div>
+            </div>
+            {% comment %} <a href="{% url 'profile' user.id %}" class="btn btn-white btn-lg border rounded p-3">
                 <i class="far fa-user" id="user"></i> <!-- uses regular style -->
-                &nbsp; {{user.get_full_name}}
+                
 
-            </a>
-           {% else %}
+            </a> {% endcomment %}
+            {% else %}
             <a href="{% url 'login' %}" class="btn btn-white btn-lg border rounded p-3">
                 <i class="far fa-user" id="user"></i> <!-- uses regular style -->
                 &nbsp; ورود به حساب کاربری
 
             </a>
-           {% endif %}
+            {% endif %}
             <a href="#" class="btn btn-white btn-larg border-right px-3 mr-2">
                 <i class="far fa-shopping-cart" aria-hidden="true"></i>
             </a>
@@ -70,38 +81,70 @@
                         <div class="mega-menu-grid">
                             <div class="sub-nav-column">
                                 <div class="z-depth-1 polariod">
-                                    <img class="w-25" src="https://dkstatics-public.digikala.com/digikala-products/89e7f2abac447a018242a954f03f8a6926344f8b_1594023235.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90" alt="">
+                                    <img class="w-25"
+                                        src="https://dkstatics-public.digikala.com/digikala-products/89e7f2abac447a018242a954f03f8a6926344f8b_1594023235.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90"
+                                        alt="">
                                 </div>
                                 <ul class="collection">
                                     <!-- these nested links should be have the correct href path to nav user to this section -->
 
                                     <li class="collection-item">
-                                        <a href="{% url 'products:products_list' 'mobile-phone' %}"><h3>گوشی موبایل</h3></a>
+                                        <a href="{% url 'products:products_list' 'mobile-phone' %}">
+                                            <h3>گوشی موبایل</h3>
+                                        </a>
                                     </li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='samsung' %}">سامسونگ</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='huawei' %}">هوآوی</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='apple' %}">اپل</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='xiaomi' %}">شیائومی</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='honor' %}">آنر</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='mobile-phone' brand='nokia' %}">نوکیا</a></li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='mobile-phone' brand='samsung' %}">سامسونگ</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='mobile-phone' brand='huawei' %}">هوآوی</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='mobile-phone' brand='apple' %}">اپل</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='mobile-phone' brand='xiaomi' %}">شیائومی</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='mobile-phone' brand='honor' %}">آنر</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='mobile-phone' brand='nokia' %}">نوکیا</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="sub-nav-column">
                                 <div class="z-depth-1 polariod">
-                                    <img class="w-25" src="https://dkstatics-public.digikala.com/digikala-products/4209444.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90" alt="">
+                                    <img class="w-25"
+                                        src="https://dkstatics-public.digikala.com/digikala-products/4209444.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90"
+                                        alt="">
                                 </div>
                                 <ul class="collection">
                                     <!-- these nested links should be have the correct href path to nav user to this section -->
 
                                     <li class="collection-item">
-                                        <a href="{% url 'products:products_list' 'laptop' %}"><h3>لپ تاپ</h3></a>
+                                        <a href="{% url 'products:products_list' 'laptop' %}">
+                                            <h3>لپ تاپ</h3>
+                                        </a>
                                     </li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='asus' %}">ایسوس</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='acer' %}">ایسر</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='apple' %}">اپل</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='dell' %}">دل</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='microsoft' %}">مایکروسافت</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='laptop' brand='lenovo' %}">لنوو</a></li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='laptop' brand='asus' %}">ایسوس</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='laptop' brand='acer' %}">ایسر</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='laptop' brand='apple' %}">اپل</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='laptop' brand='dell' %}">دل</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='laptop' brand='microsoft' %}">مایکروسافت</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='laptop' brand='lenovo' %}">لنوو</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="sub-nav-column">
@@ -111,21 +154,37 @@
                             </div>
                             <div class="sub-nav-column">
                                 <div class="z-depth-1 polariod">
-                                    <img class="w-25" src="https://dkstatics-public-2.digikala.com/digikala-products/111205158.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90" alt="">
+                                    <img class="w-25"
+                                        src="https://dkstatics-public-2.digikala.com/digikala-products/111205158.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_90"
+                                        alt="">
                                 </div>
 
-                                 <ul class="collection">
+                                <ul class="collection">
                                     <!-- these nested links should be have the correct href path to nav user to this section -->
 
                                     <li class="collection-item">
-                                        <a href="{% url 'products:products_list' 'tablet' %}"><h3> تبلت</h3></a>
+                                        <a href="{% url 'products:products_list' 'tablet' %}">
+                                            <h3> تبلت</h3>
+                                        </a>
                                     </li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='samsung' %}">سامسونگ</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='lenovo' %}">لنوو</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='apple' %}">اپل</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='huawei' %}">هوآوی</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='microsoft' %}">مایکروسافت</a></li>
-                                    <li class="collection-item"><a href="{% url 'products:products_list_brands' cat='tablet' brand='xvision' %}">ایکس ویژن</a></li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='tablet' brand='samsung' %}">سامسونگ</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='tablet' brand='lenovo' %}">لنوو</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='tablet' brand='apple' %}">اپل</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='tablet' brand='huawei' %}">هوآوی</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='tablet' brand='microsoft' %}">مایکروسافت</a>
+                                    </li>
+                                    <li class="collection-item"><a
+                                            href="{% url 'products:products_list_brands' cat='tablet' brand='xvision' %}">ایکس
+                                            ویژن</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -138,7 +197,7 @@
                 <li><i class="fas fa-plus"></i><a href="#" class="mr-1">دیجی پلاس</a>
                     <div class="mega-menu-container ">
 
-                    <div></div>
+                        <div></div>
                 </li>
                 <li><i class="fas fa-shapes"></i><a href="#" class="mr-1">دیجی کلاب</a>
                     <div class="mega-menu-container ">

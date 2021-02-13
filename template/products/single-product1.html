@@ -32,21 +32,18 @@
         <div class="row mt-5">
             {% for image in images %}
             <div class="col col-md-3">
-                <a href="{{image.image.url}}"
-                    data-lightbox="roadtrip">
-                    <img class="w-75 m-3 "
-                        src="{{image.image.url}}"
-                        alt="{{image.product.name}}"
+                <a href="{{image.image.url}}" data-lightbox="roadtrip">
+                    <img class="w-75 m-3 " src="{{image.image.url}}" alt="{{image.product.name}}"
                         title="{{image.product.name}}">
                 </a>
-                
+
             </div>
             {% endfor %}
         </div>
     </div>
     <div class="col col-md-4">
         <h6 class="mt-5" style="text-align: right;">{{object.name}}</h6>
-        <p class="title">Green GK-502 Keyboard with Persian Letters</p>
+
         <ul class="single-ul">
             <li class="single-li"><i class="fas fa-star" style="color: yellow;"></i> {{rating|floatformat:2}} </li>
             <li class="single-li">{{comments.count}} دیدگاه کابران</li>
@@ -63,15 +60,11 @@
         </ul>
         <ul class="sing-ul my-3">
             <li class="single-li" style="font-size: 0.9rem;">انتخاب رنگ</li>
-            <li class="single-li color-selection" id="black">
-                <div class="black"></div>مشکی
+            {% for color in colors %}
+            <li class="single-li color-selection" id="{{color}}" onclick="show_hide_shop_card('{{color}}')">
+                <div class="{{color}}"></div><span>{{color}}</span>
             </li>
-            <li class="single-li color-selection" id="red">
-                <div class="red"></div>قرمز
-            </li>
-            <li class="single-li color-selection" id="white">
-                <div class="white"></div>سفید
-            </li>
+            {% endfor %}
         </ul>
         <p class="options" style="text-align: right;">ویژگی های کالا</p>
         <ul style="list-style-type: disc;">
@@ -88,25 +81,29 @@
     </div>
     <div class="col col-md-4 mt-5">
         {% for color in colors %}
-            <div class="row shop-detail {{color}}-item">
+        {% if forloop.first %}
+        <div class="row shop-detail {{color}}-item">
             <div class="col col-md-12 shop-cart">
                 <svg style="color: rgba(0, 0, 0, 0.5);" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                     fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
                     <path
                         d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
                 </svg>
-                <p style="display: inline; font-size: 1rem;" >فروشنده: {{card_prodcts|shop_name:color}}</p>
-                <p style="font-size: 0.8rem; color: #5ab5cb;">عملکرد: 3.6 از 5 <span style="color: rgba(0, 0, 0, 0.3);">|</span>
+                <p style="display: inline; font-size: 1rem;">فروشنده: {{card_prodcts|shop_name:color}}</p>
+                <p style="font-size: 0.8rem; color: #5ab5cb;">عملکرد: 3.6 از 5 <span
+                        style="color: rgba(0, 0, 0, 0.3);">|</span>
                     83.6٪ رضایت از کالا</p>
                 <hr>
             </div>
             <div class="col col-md-12 shop-cart">
-                <p style="font-size: 0.85rem;"><i class="fas fa-certificate" style="color: rgba(0, 0, 0, 0.4);"></i>گارانتی 18
+                <p style="font-size: 0.85rem;"><i class="fas fa-certificate"
+                        style="color: rgba(0, 0, 0, 0.4);"></i>گارانتی 18
                     ماهه دیجی سرویس + بیمه ۱۲ ماهه ایران</p>
                 <hr>
             </div>
             <div class="col col-md-12 shop-cart">
-                <p style="font-size: 0.85rem;"><i class="fa fa-check-circle" style="color: rgba(0, 0, 0, 0.4);"></i>موجود در
+                <p style="font-size: 0.85rem;"><i class="fa fa-check-circle"
+                        style="color: rgba(0, 0, 0, 0.4);"></i>موجود در
                     انبار دیجی کالا</p>
                 <p><i class="fas fa-truck" style="color: red;"></i>ارسال دیجی کالا</p>
                 <hr>
@@ -118,6 +115,41 @@
                 <p><a href="#" class="btn btn-danger w-100 p-2" style="font-size: 1.25rem;">افزودن به سبد خرید</a></p>
             </div>
         </div>
+        {% else %}
+        <div class="row shop-detail {{color}}-item d-none">
+            <div class="col col-md-12 shop-cart">
+                <svg style="color: rgba(0, 0, 0, 0.5);" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+                    <path
+                        d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
+                </svg>
+                <p style="display: inline; font-size: 1rem;">فروشنده: {{card_prodcts|shop_name:color}}</p>
+                <p style="font-size: 0.8rem; color: #5ab5cb;">عملکرد: 3.6 از 5 <span
+                        style="color: rgba(0, 0, 0, 0.3);">|</span>
+                    83.6٪ رضایت از کالا</p>
+                <hr>
+            </div>
+            <div class="col col-md-12 shop-cart">
+                <p style="font-size: 0.85rem;"><i class="fas fa-certificate"
+                        style="color: rgba(0, 0, 0, 0.4);"></i>گارانتی 18
+                    ماهه دیجی سرویس + بیمه ۱۲ ماهه ایران</p>
+                <hr>
+            </div>
+            <div class="col col-md-12 shop-cart">
+                <p style="font-size: 0.85rem;"><i class="fa fa-check-circle"
+                        style="color: rgba(0, 0, 0, 0.4);"></i>موجود در
+                    انبار دیجی کالا</p>
+                <p><i class="fas fa-truck" style="color: red;"></i>ارسال دیجی کالا</p>
+                <hr>
+            </div>
+            <div class="col col-md-12 shop-cart">
+                <p>قیمت فروشنده</p>
+                <p>{{card_prodcts|product_price:color}}</p>
+                <p>+۱۰۰ نفر در حال بازدید این کالا می باشند.</p>
+                <p><a href="#" class="btn btn-danger w-100 p-2" style="font-size: 1.25rem;">افزودن به سبد خرید</a></p>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
@@ -128,53 +160,53 @@
         <div style="color: #5ab5cb; border-bottom: 1px dashed #5ab5cb;">کالای خود را در دیجی کالا بفروشید</div>
     </div>
     {% for shop_product in shop_products %}
-        {% if forloop.first %}
-            <div class="row sailers-list-first mt-3 p-3" style="text-align: right;" id="{{forloop.counter}}">
-                <div class="col col-md-2">
-                    <svg style="color: rgba(0, 0, 0, 0.5);" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                        fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
-                        <path
-                            d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
-                    </svg>
-                    <p style="display: inline; font-size: 1rem;">{{shop_product.shop}}</p>
-                </div>
-                <div class="col col-md-3">
-                    <p><i class="fas fa-truck"></i>ارسال دیجی کالا از ۱ روز کاری دیگر</p>
-                </div>
-                <div class="col col-md-4">
-                    <i class="fas fa-user-shield"></i>گارانتی 24 ماهه یکپارچه (سازگار حامی و آواژنگ)
-                </div>
-                <div class="col-md-1">
-                    {{shop_product.price}}
-                </div>
-                <div class="col col-md-2" style="text-align: left;">
-                    <a href="#" class="btn btn-outline-danger p-2 buy-btn">افزودن به سبد</a>
-                </div>
-            </div>
-        {% else %}
-            <div class="row sailers-list p-3" style="text-align: right;" id="{{forloop.counter}}">
-                <div class="col col-md-2">
-                    <svg style="color: rgba(0, 0, 0, 0.5);" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                        fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
-                        <path
-                            d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
-                    </svg>
-                    <p style="display: inline;">{{shop_product.shop}}</p>
-                </div>
-                <div class="col col-md-3">
-                    <p><i class="fas fa-truck"></i>ارسال دیجی کالا از ۱ روز کاری دیگر</p>
-                </div>
-                <div class="col col-md-4">
-                    <i class="fas fa-user-shield"></i>گارانتی 24 ماهه یکپارچه (سازگار حامی و آواژنگ)
-                </div>
-                <div class="col-md-1">
-                    {{shop_product.price}}
-                </div>
-                <div class="col col-md-2" style="text-align: left;">
-                    <a href="#" class="btn btn-outline-danger p-2 buy-btn">افزودن به سبد</a>
-                </div>
-            </div>
-        {% endif %}
+    {% if forloop.first %}
+    <div class="row sailers-list-first mt-3 p-3" style="text-align: right;" id="{{forloop.counter}}">
+        <div class="col col-md-2">
+            <svg style="color: rgba(0, 0, 0, 0.5);" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+                <path
+                    d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
+            </svg>
+            <p style="display: inline; font-size: 1rem;">{{shop_product.shop}}</p>
+        </div>
+        <div class="col col-md-3">
+            <p><i class="fas fa-truck"></i>ارسال دیجی کالا از ۱ روز کاری دیگر</p>
+        </div>
+        <div class="col col-md-4">
+            <i class="fas fa-user-shield"></i>گارانتی 24 ماهه یکپارچه (سازگار حامی و آواژنگ)
+        </div>
+        <div class="col-md-1">
+            {{shop_product.price}}
+        </div>
+        <div class="col col-md-2" style="text-align: left;">
+            <a href="#" class="btn btn-outline-danger p-2 buy-btn">افزودن به سبد</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="row sailers-list p-3" style="text-align: right;" id="{{forloop.counter}}">
+        <div class="col col-md-2">
+            <svg style="color: rgba(0, 0, 0, 0.5);" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+                <path
+                    d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
+            </svg>
+            <p style="display: inline;">{{shop_product.shop}}</p>
+        </div>
+        <div class="col col-md-3">
+            <p><i class="fas fa-truck"></i>ارسال دیجی کالا از ۱ روز کاری دیگر</p>
+        </div>
+        <div class="col col-md-4">
+            <i class="fas fa-user-shield"></i>گارانتی 24 ماهه یکپارچه (سازگار حامی و آواژنگ)
+        </div>
+        <div class="col-md-1">
+            {{shop_product.price}}
+        </div>
+        <div class="col col-md-2" style="text-align: left;">
+            <a href="#" class="btn btn-outline-danger p-2 buy-btn">افزودن به سبد</a>
+        </div>
+    </div>
+    {% endif %}
     {% endfor %}
 </div>
 
@@ -201,155 +233,7 @@
             </p>
         </div>
         <div class="tab-pane fade" id="property" role="tabpanel" aria-labelledby="property-tab">
-            <h3>مشخصات فنی</h3>
-            <div class="d-flex">
-                <div class="triangle"></div>
-                <div class="">مشخصات فیزیکی</div>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row">ابعاد</th>
-                            <td>{{meta.size}}</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">وزن</th>
-                            <td>{{meta.weight}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex mt-5">
-                <div class="triangle"></div>
-                <div class="">پردازنه مرکزی</div>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row">سازنده پردازنده</th>
-                            <td>{{meta.cpu_manufacturer}}</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">سری پردازنده</th>
-                            <td>{{meta.cpu_series}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">مدل پردازنده</th>
-                            <td>{{meta.cpu_model}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">فرکانس پردازنده</th>
-                            <td>{{meta.cpu_speed}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">حافظه Cache</th>
-                            <td>{{meta.cach}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="d-flex mt-5">
-                <div class="triangle"></div>
-                <div class="">حافظه رم</div>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row">ظرفیت حافظه RAM</th>
-                            <td>{{meta.ram_capacity}}</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">نوع حافظه RAM</th>
-                            <td>{{meta.ram_type}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="d-flex mt-5">
-                <div class="triangle"></div>
-                <div class="">حافظه داخلی</div>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row">ظرفیت حافظه داخلی</th>
-                            <td>{{meta.storage}}</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">نوع حافظه داخلی</th>
-                            <td>{{meta.storage_type}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex mt-5">
-                <div class="triangle"></div>
-                <div class=""> پردازنده گرافیکی</div>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row"> سازنده پردازنده گرافیکی </th>
-                            <td>{{meta.gpu_manufacturer}}</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">مدل پردازنده گرافیکی</th>
-                            <td>{{meta.gpu_model}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">حافظه پردازنده گرافیکی</th>
-                            <td>{{meta.gpu_ram}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex mt-5">
-                <div class="triangle"></div>
-                <div class="">صفحه نمایش</div>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th scope="row"> اندازه صفحه نمایش</th>
-                            <td>{{meta.display_size}}</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">نوع صفحه نمایش</th>
-                            <td>{{meta.display_type}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">دقت صفحه نمایش</th>
-                            <td>{{meta.display_accuracy}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">صفحه نمایش مات</th>
-                            <td>{{meta.display_mate}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">صفحه نمایش لمسی</th>
-                            <td>{{meta.display_touchable}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">دقت صفحه نمایش</th>
-                            <td>{{meta.display_accuracy}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            {% block properties %}{% endblock properties %}
         </div>
         <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
             <div class="message"></div>
@@ -369,7 +253,7 @@
                         <small class="card-subtitle">{{comment.created|date}}</small>
                         <p>{{comment.author.get_full_name}}</p>
                         <span class="badge badge-success my-3" id="like_{{comment.id}}">Likes
-                            {{likes|get_item:comment.id}} 
+                            {{likes|get_item:comment.id}}
                         </span>
                         <span class="badge badge-danger m-3" id="dislike_{{comment.id}}">Dislikes
                             {{dislikes|get_item:comment.id}}
@@ -419,119 +303,99 @@
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 <script>
-var toggle = false;
-$(document).ready(function () {
-    toggle = false;
-    $(".toggle").hide();
-    $(".more-text").text("موارد بیشتر");
-    $('.red-item').hide();
-    $('.white-item').hide();
-
-});
-function expand() {
-    if (toggle) {
+    var toggle = false;
+    $(document).ready(function () {
+        toggle = false;
         $(".toggle").hide();
-        toggle = false
         $(".more-text").text("موارد بیشتر");
-    } else {
-        $(".toggle").show();
-        toggle = true
-        $(".more-text").text("بستن");
+    });
+    function expand() {
+        if (toggle) {
+            $(".toggle").hide();
+            toggle = false
+            $(".more-text").text("موارد بیشتر");
+        } else {
+            $(".toggle").show();
+            toggle = true
+            $(".more-text").text("بستن");
+        }
     }
-}
-
-$("#black").click(function (e) {
-    e.preventDefault();
-    $("#black").css("border-color", '#5ab5cb');
-    $("#red").css('border-color', 'rgba(0,0,0,0.25)');
-    $("#white").css('border-color', 'rgba(0,0,0,0.25)');
-
-    $('.black-item').show();
-    $('.red-item').hide();
-    $('.white-item').hide();
-});
-
-$("#red").click(function (e) {
-    e.preventDefault();
-    $("#red").css("border-color", '#5ab5cb');
-    $("#black").css('border-color', 'rgba(0,0,0,0.25)');
-    $("#white").css('border-color', 'rgba(0,0,0,0.25)');
 
 
-    $('.black-item').hide();
-    $('.red-item').show();
-    $('.white-item').hide();
-});
+    function show_hide_shop_card(color) {
+        console.log(color);
+        var colors_list = ['.black-item', '.white-item', '.red-item', '.pink-item', '.green-item', '.yellow-item'];
+        $.each(colors_list, function (indexInArray, valueOfElement) {
 
-$("#white").click(function (e) {
-    e.preventDefault();
-    $("#white").css("border-color", '#5ab5cb');
-    $("#red").css('border-color', 'rgba(0,0,0,0.25)');
-    $("#black").css('border-color', 'rgba(0,0,0,0.25)');
-
-
-    $('.black-item').hide();
-    $('.red-item').hide();
-    $('.white-item').show();
-});
-
-
-$('#submitComment').on('click', function (e) {
-    e.preventDefault();
-    var $form = $('#commentForm');
-    var title = document.forms["commentForm"]["title"].value;
-    var body = document.forms["commentForm"]["body"].value;
-    if (title == "" || body == "") {
-        $(".message").append('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close" style="text-align: right;">&times;</a>عنوان و/یا متن کامنت خالی است.</div >');
-    }
-    else {
-        $(".message").append('<div class="alert alert-success alert-dismissible">پیام با موفقیت ثبت گردید. پس از تایید در سایت نمایش داده خواهد شد.<a href="#" class="close" data-dismiss="alert" aria-label="close" style="text-align: right;">&times;</a></div >');
-        $.ajax({
-            type: "post",
-            url: "{% url 'products:laptop_view' object.slug %}",
-            data: $("#commentForm").serialize(),
-            success: function (response) {
-                console.log(response);
-            },
-            error: function (param) {
-                console.log(param);
+            if ($(valueOfElement).length) {
+                if (valueOfElement.includes(color)) {
+                    console.log(color);
+                    $(valueOfElement).removeClass("d-none");
+                } else {
+                    $(valueOfElement).removeClass("d-none").addClass("d-none");
+                }
+                
             }
         });
+
     }
-});
 
-
-function like(id, like_type) {
-    $.ajax({
-        type: "post",
-        url: "{% url 'products:like_comment' %}",
-        data: {
-            id: id,
-            like_type: like_type,
-            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
-            action: 'post',
-        },
-        success: function (json) {
-            json = JSON.parse(json)
-            like_counts = json['like_counts']
-            if (like_type == 'like') {
-                e_id = "like_" + id;
-                string = "Like ";
-                document.getElementById("like_btn_" + id).className = "btn btn-success";
-            }
-            else {
-                e_id = "dislike_" + id;
-                string = "Dislikes ";
-                document.getElementById("dislike_btn_" + id).className = "btn btn-danger";
-            }
-            // element = document.getElementById(e_id);
-            document.getElementById(e_id).innerHTML = string + like_counts;
-            document.getElementById("like_btn_" + id).disabled = true;
-            document.getElementById("dislike_btn_" + id).disabled = true;
-        },
-        error: function () { alert('error in liking') }
+    $('#submitComment').on('click', function (e) {
+        e.preventDefault();
+        var $form = $('#commentForm');
+        var title = document.forms["commentForm"]["title"].value;
+        var body = document.forms["commentForm"]["body"].value;
+        if (title == "" || body == "") {
+            $(".message").append('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close" style="text-align: right;">&times;</a>عنوان و/یا متن کامنت خالی است.</div >');
+        }
+        else {
+            $(".message").append('<div class="alert alert-success alert-dismissible">پیام با موفقیت ثبت گردید. پس از تایید در سایت نمایش داده خواهد شد.<a href="#" class="close" data-dismiss="alert" aria-label="close" style="text-align: right;">&times;</a></div >');
+            $.ajax({
+                type: "post",
+                url: "{% url 'products:laptop_view' object.category.slug object.slug %}",
+                data: $("#commentForm").serialize(),
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (param) {
+                    console.log(param);
+                }
+            });
+        }
     });
-}
+
+
+    function like(id, like_type) {
+        $.ajax({
+            type: "post",
+            url: "{% url 'products:like_comment' %}",
+            data: {
+                id: id,
+                like_type: like_type,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken').val(),
+                action: 'post',
+            },
+            success: function (json) {
+                json = JSON.parse(json)
+                like_counts = json['like_counts']
+                if (like_type == 'like') {
+                    e_id = "like_" + id;
+                    string = "Like ";
+                    document.getElementById("like_btn_" + id).className = "btn btn-success";
+                }
+                else {
+                    e_id = "dislike_" + id;
+                    string = "Dislikes ";
+                    document.getElementById("dislike_btn_" + id).className = "btn btn-danger";
+                }
+                // element = document.getElementById(e_id);
+                document.getElementById(e_id).innerHTML = string + like_counts;
+                document.getElementById("like_btn_" + id).disabled = true;
+                document.getElementById("dislike_btn_" + id).disabled = true;
+            },
+            error: function () { alert('error in liking') }
+        });
+    }
 
 </script>
 {% endblock script %}

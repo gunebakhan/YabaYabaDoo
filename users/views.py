@@ -96,3 +96,5 @@ class EditUserProfileView(LoginRequiredMixin, AccessMixin, UpdateView):
 
     def get_success_url(self, *args, **kwargs):
         return reverse("profile", kwargs={'pk': self.kwargs['pk']})
+
+

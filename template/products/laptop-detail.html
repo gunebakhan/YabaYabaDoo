@@ -1,0 +1,154 @@
+{% extends 'products/single-product1.html' %}
+{% load static %}
+
+{% block properties %}
+<h3>مشخصات فنی</h3>
+<div class="d-flex">
+    <div class="triangle"></div>
+    <div class="">مشخصات فیزیکی</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">ابعاد</th>
+                <td>{{meta.size}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">وزن</th>
+                <td>{{meta.weight}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">پردازنه مرکزی</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">سازنده پردازنده</th>
+                <td>{{meta.cpu_manufacturer}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">سری پردازنده</th>
+                <td>{{meta.cpu_series}}</td>
+            </tr>
+            <tr>
+                <th scope="row">مدل پردازنده</th>
+                <td>{{meta.cpu_model}}</td>
+            </tr>
+            <tr>
+                <th scope="row">فرکانس پردازنده</th>
+                <td>{{meta.cpu_speed}}</td>
+            </tr>
+            <tr>
+                <th scope="row">حافظه Cache</th>
+                <td>{{meta.cach}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">حافظه رم</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">ظرفیت حافظه RAM</th>
+                <td>{{meta.ram_capacity}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">نوع حافظه RAM</th>
+                <td>{{meta.ram_type}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">حافظه داخلی</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">ظرفیت حافظه داخلی</th>
+                <td>{{meta.storage}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">نوع حافظه داخلی</th>
+                <td>{{meta.storage_type}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class=""> پردازنده گرافیکی</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row"> سازنده پردازنده گرافیکی </th>
+                <td>{{meta.gpu_manufacturer}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">مدل پردازنده گرافیکی</th>
+                <td>{{meta.gpu_model}}</td>
+            </tr>
+            <tr>
+                <th scope="row">حافظه پردازنده گرافیکی</th>
+                <td>{{meta.gpu_ram}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex mt-5">
+    <div class="triangle"></div>
+    <div class="">صفحه نمایش</div>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row"> اندازه صفحه نمایش</th>
+                <td>{{meta.display_size}}</td>
+
+            </tr>
+            <tr>
+                <th scope="row">نوع صفحه نمایش</th>
+                <td>{{meta.display_type}}</td>
+            </tr>
+            <tr>
+                <th scope="row">دقت صفحه نمایش</th>
+                <td>{{meta.display_accuracy}}</td>
+            </tr>
+            <tr>
+                <th scope="row">صفحه نمایش مات</th>
+                <td>{{meta.display_mate}}</td>
+            </tr>
+            <tr>
+                <th scope="row">صفحه نمایش لمسی</th>
+                <td>{{meta.display_touchable}}</td>
+            </tr>
+            <tr>
+                <th scope="row">دقت صفحه نمایش</th>
+                <td>{{meta.display_accuracy}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock properties %}
