@@ -29,6 +29,9 @@ def shop_name(dicti, key):
 def product_price(dicti, key):
     return dicti.get(key).price
 
+@register.filter(name='product_id')
+def product_id(dicti, key):
+    return dicti.get(key).id
 
 @register.filter('get_rate')
 def get_rate(dicti, key):

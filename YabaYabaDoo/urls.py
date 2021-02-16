@@ -21,10 +21,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cart/', include('shop.urls')),
     
-    path('', include('site_view.urls'), name="home"),
     path('products/', include('products.urls')),
-    path('auth/', include('users.urls'))
+    path('auth/', include('users.urls')),
+    path('', include('site_view.urls'), name="home"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
 

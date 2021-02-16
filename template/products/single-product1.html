@@ -112,7 +112,12 @@
                 <p>قیمت فروشنده</p>
                 <p>{{card_prodcts|product_price:color}}</p>
                 <p>+۱۰۰ نفر در حال بازدید این کالا می باشند.</p>
-                <p><a href="#" class="btn btn-danger w-100 p-2" style="font-size: 1.25rem;">افزودن به سبد خرید</a></p>
+                <form action="{% url 'shop:cart_add' card_prodcts|product_id:color %}" method="post">
+                    {{cart_product_form|crispy}}
+                          {% csrf_token %}
+                    <input type="submit" value="افزودن به سبد خرید" class="btn btn-danger w-100 p-2" style="font-size: 1.25rem;">
+                </form>
+                
             </div>
         </div>
         {% else %}
@@ -146,7 +151,11 @@
                 <p>قیمت فروشنده</p>
                 <p>{{card_prodcts|product_price:color}}</p>
                 <p>+۱۰۰ نفر در حال بازدید این کالا می باشند.</p>
-                <p><a href="#" class="btn btn-danger w-100 p-2" style="font-size: 1.25rem;">افزودن به سبد خرید</a></p>
+                <form action="{% url 'shop:cart_add' card_prodcts|product_id:color %}" method="post">
+                    {{cart_product_form|crispy}}
+                          {% csrf_token %}
+                    <input type="submit" value="افزودن به سبد خرید" class="btn btn-danger w-100 p-2" style="font-size: 1.25rem;">
+                </form>
             </div>
         </div>
         {% endif %}

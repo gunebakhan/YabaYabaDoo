@@ -20,5 +20,5 @@ urlpatterns = [
         template_name="user/password_reset_complete.html"), name="password_reset_complete"),
     path('edit_profile/<pk>/', views.EditUserProfileView.as_view(), name="edit_profile"),
     path('profile/<pk>/', views.ProfileView.as_view(), name="profile"),
-    path('logout/', auth_views.LogoutView.as_view(next_page='register'), name='logout')
+    path('logout/', auth_views.LogoutView.as_view(redirect_field_name="home"), name='logout')
 ]

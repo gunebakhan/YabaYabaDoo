@@ -50,6 +50,7 @@
                     &nbsp; {{user.get_full_name}} </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{% url 'profile' user.id %}" >پروفایل</a>
+                    <a class="dropdown-item" href="{% url 'shop:cart_detail' %}">سبد خرید</a>
                     <a class="dropdown-item" href="{% url 'password_reset' %}">تغییر رمز عبور</a>
                     <a class="dropdown-item" href="{% url 'logout' %}">خروج</a>
                 </div>
@@ -66,7 +67,7 @@
 
             </a>
             {% endif %}
-            <a href="#" class="btn btn-white btn-larg border-right px-3 mr-2">
+            <a href="{% url 'shop:cart_detail' %}" class="btn btn-white btn-larg border-right px-3 mr-2">
                 <i class="far fa-shopping-cart" aria-hidden="true"></i>
             </a>
         </div>

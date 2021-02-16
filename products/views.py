@@ -21,7 +21,7 @@ from django.db.models import Prefetch
 from django.utils.decorators import method_decorator
 from django.core import serializers
 from django.db.models import Q
-
+from shop.forms import CartAddProductForm
 
 # Create your views here.
 
@@ -98,7 +98,7 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
         context = super().get_context_data(*args, **kwargs)
         allcomments = Comment.objects.filter(draft=False, product=self.object)
         context['comments'] = allcomments
-        print('s', allcomments)
+        # print('s', allcomments)
         try:
             if self.kwargs['cat'] == 'laptop':
                 meta = ProductMeta.objects.get(product=self.object)
@@ -157,9 +157,9 @@ class LaptopDetail(AjaxableResponseMixin, FormMixin, DetailView):
             context['card_prodcts'][item[0]] = shop_products.order_by(
                 'price').filter(color=item[0]).first()
 
-        print(context['colors'])
-        context['images'] = ImageGallery.objects.filter(product=self.object)
 
+        context['images'] = ImageGallery.objects.filter(product=self.object)
+        context['cart_product_form'] = CartAddProductForm()
         return context
 
     def post(self, request, *args, **kwargs):
