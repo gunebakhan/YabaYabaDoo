@@ -6,7 +6,7 @@ from .cart import Cart
 from .forms import CartAddProductForm, OrderCreateForm
 from shop import cart
 from django.views.generic import DetailView
-
+from .tasks import order_created
 from shop import forms
 
 
@@ -57,6 +57,8 @@ def order_create(request):
                                          count=item['quantity'])
             # clear cart
             cart.clear()
+            # launch asynchronous task
+            order_created.delay(order.id)
             return render(request, 'orders/created.html', {'order': order})
     else:
         form = OrderCreateForm()
