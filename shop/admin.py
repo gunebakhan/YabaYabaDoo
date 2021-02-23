@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BasketItem, Basket, Shop, ShopProduct, Order, OrderItem, Payment
+from .models import Shop, ShopProduct, ShopOrder, OrderItem
 
 
 # Register your models here.
@@ -33,7 +33,7 @@ class OrderItemAdmin(admin.ModelAdmin):
         ordering = ['-create_at', '-update_at']
 
 
-@admin.register(Order)
+@admin.register(ShopOrder)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('user', 'create_at', 'update_at', 'paid')
     search_fields = ('user', )
@@ -43,20 +43,20 @@ class OrderAdmin(admin.ModelAdmin):
         ordering = ['-paid', '-create_at', '-update_at']
 
 
-@admin.register(Payment)
-class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('order', 'user', 'paid_price', 'create_at', 'update_at')
-    search_fields = ('user', 'order')
+# @admin.register(Payment)
+# class PaymentAdmin(admin.ModelAdmin):
+#     list_display = ('order', 'user', 'paid_price', 'create_at', 'update_at')
+#     search_fields = ('user', 'order')
 
 
-@admin.register(BasketItem)
-class BasketItemAdmin(admin.ModelAdmin):
-    list_display = ('basket', 'shop_product', 'count', 'create_at', 'update_at')
-    search_fields = ('baset', 'shop_product')
+# @admin.register(BasketItem)
+# class BasketItemAdmin(admin.ModelAdmin):
+#     list_display = ('basket', 'shop_product', 'count', 'create_at', 'update_at')
+#     search_fields = ('baset', 'shop_product')
 
 
-@admin.register(Basket)
-class BasketAdmin(admin.ModelAdmin):
-    list_display = ('user', 'create_at', 'update_at')
-    search_fields = ('user', )
+# @admin.register(Basket)
+# class BasketAdmin(admin.ModelAdmin):
+#     list_display = ('user', 'create_at', 'update_at')
+#     search_fields = ('user', )
 

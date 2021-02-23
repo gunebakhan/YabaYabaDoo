@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load index %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+{% endblock style %}
+
+{% block content %}
+
+<div class='container' style="text-align:right;">
+    <h1>وارسی خرید</h1>
+    <div class="order-info">
+        <h3>سفارش شما</h3>
+        <ul class="list-group">
+            <li class="list-group-item active">لیست خرید</li>
+            {% for item in cart %}
+                <li class="list-group-item">
+                    {{item.quantity}} * {{item.product.product.name}}
+                    <span>{{item.total_price}}</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <p class="list-group-item list-group-item-info">قیمت کل {{cart.get_total_price}} </p>
+    </div>
+    <form method="post" class="order-form">
+        {{form|crispy}}
+        <p><input type="submit" value="تایید سفارش" class="btn btn-success"></p>
+        {% csrf_token %}
+    </form>
+</div>
+
+{% endblock content %}
+
+
+{% block script %}
+{% endblock script %}

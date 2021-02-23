@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load index %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+{% endblock style %}
+
+{% block content %}
+
+<div class='container' style="text-align:right;">
+   <h1>متشکریم</h1>
+   <p>خرید شما با موفقیت کامل انجام پذیرفت. کد رهگیری شما <strong>{{order.id}}</strong> است.</p>
+</div>
+
+{% endblock content %}
+
+
+{% block script %}
+{% endblock script %}

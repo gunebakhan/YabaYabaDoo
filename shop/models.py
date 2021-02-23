@@ -54,7 +54,8 @@ class ShopProduct(models.Model):
 
 class OrderItem(models.Model):
 
-    order = models.ForeignKey("Order", verbose_name=_("Order"), on_delete=models.CASCADE, related_query_name='order_items', related_name='order_items')
+    order = models.ForeignKey("ShopOrder", verbose_name=_(
+        "ShopOrder"), on_delete=models.CASCADE, related_query_name='order_items', related_name='order_items')
     shop_product = models.ForeignKey(ShopProduct, verbose_name=_("Shop Product"), on_delete=models.CASCADE, related_query_name='order_items', related_name='order_items')
     count = models.IntegerField(_("Counts"))
     price = models.DecimalField(_("price"), max_digits=10, decimal_places=2)
@@ -67,39 +68,36 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.shop_product.product.name
+    
+    def get_cost(self):
+        return self.price * self.count
 
 
-class Order(models.Model):
+class ShopOrder(models.Model):
 
     user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE, related_query_name='orders', related_name='orders')
     create_at = models.DateTimeField(_("Create At"), auto_now=False, auto_now_add=True)
     update_at = models.DateTimeField(_("Update At"), auto_now=True, auto_now_add=False)
-    discription = models.TextField(_("Discription"))
+    discription = models.TextField(_("Discription"), blank=True)
     paid = models.BooleanField(_("Paid"), default=False)
 
 
     class Meta:
-        verbose_name = _("Order")
-        verbose_name_plural = _("Orders")
+        verbose_name = _("ShopOrder")
+        verbose_name_plural = _("ShopOrder")
 
     def __str__(self):
-        return self.discription
+        return f'Order {self.id}'
     
-    @property
-    def total_order_price(self):
-        order_items = self.order_items.all()
-        
-        total_price = 0.0
-        for item in order_items:
-            total_price += (item.count * item.price)
-        
-        return total_price
+    def get_total_cost(self):
+        return sum(item.get_cost() for item in self.order_items.all())
 
 
 
 class Payment(models.Model):
 
-    order = models.OneToOneField(Order, verbose_name=_("Order"), on_delete=models.CASCADE, related_query_name='payments', related_name="payments")
+    order = models.OneToOneField(ShopOrder, verbose_name=_(
+        "ShopOrder"), on_delete=models.CASCADE, related_query_name='payments', related_name="payments")
     user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE, related_query_name='payments', related_name='payments')
     paid_price = models.DecimalField(_("Paid Price"), max_digits=10, decimal_places=2, default=0.0)
     create_at = models.DateTimeField(_("Create At"), auto_now=False, auto_now_add=True)

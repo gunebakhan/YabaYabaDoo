@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from shop.models import ShopProduct
+from django.contrib.auth.decorators import login_required
+from shop.models import OrderItem, ShopProduct
 from .cart import Cart
-from .forms import CartAddProductForm
+from .forms import CartAddProductForm, OrderCreateForm
 from shop import cart
 from django.views.generic import DetailView
+
+from shop import forms
+
 
 # Create your views here.
 @require_POST
@@ -35,5 +39,25 @@ def cart_detail(request):
     return render(request, 'cart/detail.html', {'cart': cart})
 
 
-
-    
+@login_required
+def order_create(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        form = OrderCreateForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            # print('dsrrf')
+            # print(request.user.id)
+            order.user = request.user
+            order.save()
+            for item in cart:
+                OrderItem.objects.create(order=order,
+                                         shop_product=item['product'],
+                                         price=item['price'],
+                                         count=item['quantity'])
+            # clear cart
+            cart.clear()
+            return render(request, 'orders/created.html', {'order': order})
+    else:
+        form = OrderCreateForm()
+    return render(request, 'orders/create.html', {'cart': cart, 'form': form})

@@ -13,7 +13,7 @@
 {% block content %}
 
 <div class='container'>
-<h1>سبد خرید</h1>
+<h1 style="text-align:right;">سبد خرید</h1>
   <table class="cart">
     <thead>
       <tr>
@@ -62,11 +62,16 @@
       </tr>
     </tbody>
   </table>
+  {% if request.user.is_authenticated %}
+  <p style="text-align:right;"><a href="{% url "shop:order_create" %}"" class="btn btn-primary p-2">برای ادامه خرید کلیک کنید</a></p>
+  {% else %}
+  <p style="text-align:right;"><a href="{% url 'login' %}" class="btn btn-primary p-2">برای ادامه خرید وارد حساب کاربری خود شوید.</a></p>
+  {% endif %}
 </div>
 
 {% endblock content %}
 
 
 {% block script %}
-<script>
+
 {% endblock script %}
