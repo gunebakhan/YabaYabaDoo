@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse, redirect
+from shop.models import Shop
+from django.shortcuts import get_object_or_404, render, HttpResponse, redirect
 from django.views.generic import CreateView, TemplateView, UpdateView, DetailView
 from .forms import SignUpForm, UserProfileForm
 from django.urls import reverse_lazy
@@ -79,6 +80,12 @@ class ProfileView(LoginRequiredMixin, AccessMixin, DetailView):
         if int(request.user.id) != int(self.kwargs['pk']):
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['shops'] = Shop.objects.filter(user=self.object)
+        print(context)
+        return context
 
 
 class EditUserProfileView(LoginRequiredMixin, AccessMixin, UpdateView):
@@ -89,12 +96,14 @@ class EditUserProfileView(LoginRequiredMixin, AccessMixin, UpdateView):
     raise_exception = True
 
     def dispatch(self, request, *args, **kwargs):
-        print(request.user.id)
         if int(request.user.id) != int(self.kwargs['pk']):
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self, *args, **kwargs):
         return reverse("profile", kwargs={'pk': self.kwargs['pk']})
+    
+
+    
 
 

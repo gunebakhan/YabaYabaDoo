@@ -41,6 +41,16 @@
                             <td>تاریخ عضویت</td>
                             <td>{{user.date_joined|date}}</td>
                         </tr>
+                         {% if request.user.is_staff %}
+                         {% for shop in shops %}
+                            <tr>
+                                <td>{{shop}}</td>
+                                <td>
+                                    <a href="{% url 'shop:shop_detail' shop.slug %} " class="btn btn-success">به فروشگاه برو</a>
+                                </td>
+                            </tr>
+                         {% endfor %}
+                         {% endif %}
                     </tbody>
                 </table>
                 <a href="{% url 'edit_profile' user.pk %}" class="btn btn-primary w-100">ویرایش اطلاعات کاربری</a>

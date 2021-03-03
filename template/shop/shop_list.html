@@ -29,7 +29,11 @@
 
 {% block content %}
 
-    <div class="col col-md-12">
+    <div class="col col-md-12 my-3">
+    {% ifequal owner request.user %}
+        <a href="{% url 'shop:create_shop_product' object.slug %}" class="btn btn-danger w-100 my-3 p-3">اضافه کردن محصول</a>
+    {% endifequal %}
+    
            <div class="row product_list">
                 {% for product in products %}
                 <div class="col col-md-3">
@@ -47,12 +51,9 @@
                                         style="font-size:0.7rem;">{{product.product.rate}}</span></span>
                             </p>
                             <p style="font-size: 1rem; text-align: left;">{{product.price}} تومان</p>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item shop" style="font-size: 0.85rem;">
-                                    <i class="fas fa-shopping-cart" style="color: rgba(0, 0, 0, 0.4);"></i>
-                                    {{object}} <i class="fas fa-smile" style="color: red;"></i>
-                                </li>
-                            </ul>
+                            {% ifequal owner request.user %}
+                                <a href="{% url 'shop:edit_shop_product' product.id %}" class="btn btn-success">ویرایش محصول</a>
+                            {% endifequal %}
                         </div>
                     </div>
                 </div>

@@ -357,7 +357,7 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
             elif datum.startswith('expensive'):
                 search_fields['price'] = '-price'
 
-        print(search_fields)
+        # print(search_fields)
         product_list = ProductMeta.objects.all()
         if search_fields.get('gpu', None):
             # print(search_fields.get('gpu', None))
@@ -382,7 +382,7 @@ class ProductsList(JSONResponseMixin, AjaxResponseMixin, ListView):
         if search_fields.get('ramCapacity', None):
             product_list = product_list.filter(
                 ram_capacity__in=search_fields['ramCapacity'])
-            print(product_list.count())
+            # print(product_list.count())
 
         if search_fields.get('cpu', None):
             product_list = product_list.filter(

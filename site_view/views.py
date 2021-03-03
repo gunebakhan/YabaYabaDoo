@@ -25,7 +25,7 @@ class SliderView(TemplateView):
         context['laptops'] = []
         for product in laptops:
             context['laptops'].append(ShopProduct.objects.filter(product=product).first())
-        print(context['laptops'])
+        # print(context['laptops'])
         context['logos'] = Logo.objects.get(title='logo')
         return context
 
