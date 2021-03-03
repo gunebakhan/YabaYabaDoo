@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load index %}
+{% load humanize %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+    crossorigin="anonymous" />
+<style>
+    #slider {
+        margin: 10px;
+    }
+
+
+    .shop {
+        opacity: 0;
+    }
+
+    .card:hover .shop {
+        opacity: 1;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/products_list.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+
+    <div class="col col-md-12">
+           <div class="row product_list">
+                {% for product in products %}
+                <div class="col col-md-3">
+                    <div class="card">                            
+                        <a href="{% url 'products:laptop_view' product.product.category.slug product.product.slug %}" ><img class="card-img-top"
+                                src="{{product.product.image.url}}" alt="Card image cap"></a> 
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size: 0.85rem; color: rgba(0, 0, 0, 0.5);">
+                                {{product.product.name}}</h5>
+                            <p class="card-text d-flex justify-content-between">
+                                <span><i class="fa fa-check-circle" aria-hidden="true"
+                                        style="color: seagreen;"></i><span class="mr-1"
+                                        style="font-size: 0.7rem; color:rgba(0, 0, 0, 0.5)">موجود در انبار</span></span>
+                                <span dir="ltr"><i class="fas fa-star" style="color: gold; font-size:0.7rem;"></i><span
+                                        style="font-size:0.7rem;">{{product.product.rate}}</span></span>
+                            </p>
+                            <p style="font-size: 1rem; text-align: left;">{{product.price}} تومان</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item shop" style="font-size: 0.85rem;">
+                                    <i class="fas fa-shopping-cart" style="color: rgba(0, 0, 0, 0.4);"></i>
+                                    {{object}} <i class="fas fa-smile" style="color: red;"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+{% endblock content %}
+

@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'shop.context_processors.cart', 
+                'shop.context_processors.shops',
                 'site_view.context_processors.logo',
             ],
             'libraries': {

@@ -1,13 +1,15 @@
+from typing import List
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
-from shop.models import OrderItem, ShopProduct
+from shop.models import OrderItem, Shop, ShopProduct
 from .cart import Cart
 from .forms import CartAddProductForm, OrderCreateForm
 from shop import cart
 from django.views.generic import DetailView
 from .tasks import order_created
 from shop import forms
+
 
 
 # Create your views here.
@@ -63,3 +65,14 @@ def order_create(request):
     else:
         form = OrderCreateForm()
     return render(request, 'orders/create.html', {'cart': cart, 'form': form})
+
+
+class ShopDetail(DetailView):
+    model = Shop
+    template_name = 'shop/shop_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["products"] = ShopProduct.objects.filter(shop=self.object)
+        return context
+    
